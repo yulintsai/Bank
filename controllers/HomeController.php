@@ -29,7 +29,8 @@ class HomeController extends Controller
     
     public function acDetails()
     {
-        // $do = $this -> model("Account");
-        // $do -> showDetails();
+        $do = $this -> model("Account");
+        $data = $do -> showDetails();
+        $this -> view("echoforeach",$data);
     }
 }

@@ -29,7 +29,11 @@ class Account
     
     public function showDetails()
     {
-
+        $sql = "SELECT * 
+            FROM  `User` 
+            WHERE  `Account` = 'rain'";
+        $result = Server::$db -> query($sql)-> fetch(PDO::FETCH_ASSOC);
+        return $result;
     }
         //查詢明細
 }
