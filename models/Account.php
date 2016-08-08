@@ -5,7 +5,7 @@ class Account
     {
         Server::pdoConnect();
     }
-    public function doDispense($MONEY, $remark)
+    public function doDispense($account, $MONEY, $remark)
     {
         Server::$db->beginTransaction();
         $sql = "SELECT `ID`, `Balance` FROM `User` 
@@ -22,9 +22,8 @@ class Account
             :Balance,
             :Remark
             )";
-        $Account = "rain";
         $result = Server::$db->prepare($sql);
-        $result->bindParam(':Account', $Account);
+        $result->bindParam(':Account', $account);
         $result->bindParam(':Dispense', $MONEY, PDO::PARAM_INT);
         $result->bindParam(':Balance', $Balance, PDO::PARAM_INT);
         $result->bindParam(':Remark', $remark);
@@ -34,7 +33,7 @@ class Account
     }
        //收款
     
-    public function doDeposit($MONEY ,$remark)
+    public function doDeposit($account, $MONEY ,$remark)
     {
         Server::$db->beginTransaction();
         $sql = "SELECT `ID`, `Balance` FROM `User` 
@@ -49,9 +48,8 @@ class Account
             :Balance,
             :Remark
             )";
-        $Account = "rain";
         $result = Server::$db->prepare($sql);
-        $result->bindParam(':Account', $Account);
+        $result->bindParam(':Account', $account);
         $result->bindParam(':Deposit', $MONEY, PDO::PARAM_INT);
         $result->bindParam(':Balance', $Balance, PDO::PARAM_INT);
         $result->bindParam(':Remark', $remark);

@@ -13,8 +13,9 @@ class HomeController extends Controller
             $MONEY = $_POST['Money'];
             $do = $this->model("Account");
             $test = $this->model("DataFilter");
+            $account = $test->test_input($_POST['Account']);
             $remark = $test->test_input($_POST['Remark']);
-            $result = $do->doDispense($MONEY, $remark);
+            $result = $do->doDispense($account, $MONEY, $remark);
             if ($result) {
                     //出款成功
                 $this->view("alertMsg", "Dispense Success");
@@ -32,8 +33,9 @@ class HomeController extends Controller
             $MONEY = $_POST['Money'];
             $do = $this->model("Account");
             $test = $this->model("DataFilter");
+            $account = $test->test_input($_POST['Account']);
             $remark = $test->test_input($_POST['Remark']);
-            $result = $do->doDeposit($MONEY, $remark);
+            $result = $do->doDeposit($account, $MONEY, $remark);
             if ($result) {
                 //入款成功
             $this->view("alertMsg", "Deposit Success");
