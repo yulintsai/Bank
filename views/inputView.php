@@ -3,3 +3,4 @@
     出/入款<input type="text" name="Money"/>
     <input type="submit" name="Submit"/>
 </form>
+<a href='/Bank'>BACK</a>

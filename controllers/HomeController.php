@@ -15,9 +15,9 @@ class HomeController extends Controller
             $result = $do->doDispense($MONEY);
                 if ($result) {
                         //出款成功
-                    $this->view("alertMsg","Dispense Success");
+                    $this->view("alertMsg", "Dispense Success");
                     } else {
-                        $this->view("alertMsg","Dispense ERROR");
+                        $this->view("alertMsg", "Dispense ERROR");
                     }
         }
     }
@@ -32,9 +32,9 @@ class HomeController extends Controller
             $result = $do->doDeposit($MONEY);
                 if ($result) {
                     //入款成功
-                $this->view("alertMsg","Deposit Success");
+                $this->view("alertMsg", "Deposit Success");
                 } else {
-                    $this->view("alertMsg","Deposit ERROR");
+                    $this->view("alertMsg", "Deposit ERROR");
                 }
         }
     }
@@ -44,7 +44,7 @@ class HomeController extends Controller
     {
         $do = $this->model("Account");
         $data = $do->searchBalance();
-        $this->view("echoMsg",$data['Balance']);
+        $this->view("echoMsg", $data['Balance']);
     }
         //餘額查詢
         
@@ -52,7 +52,7 @@ class HomeController extends Controller
     {
         $do = $this->model("Account");
         $data = $do->showDetails();
-        $this->view("echoforeach",$data);
+        $this->view("showDetails", $data);
     }
         //明細查詢
 }
