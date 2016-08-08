@@ -14,8 +14,10 @@ class HomeController extends Controller
             $do = $this->model("Account");
             $result = $do->doDispense($MONEY);
                 if ($result) {
-                        //入款成功
+                        //出款成功
                     $this->view("alertMsg","Dispense Success");
+                    } else {
+                        $this->view("alertMsg","Dispense ERROR");
                     }
         }
     }
@@ -31,6 +33,8 @@ class HomeController extends Controller
                 if ($result) {
                     //入款成功
                 $this->view("alertMsg","Deposit Success");
+                } else {
+                    $this->view("alertMsg","Deposit ERROR");
                 }
         }
     }

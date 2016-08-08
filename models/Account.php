@@ -7,6 +7,16 @@ class Account
     }
     public function doDispense($MONEY)
     {
+        Server::$db->beginTransaction();
+        $sql = "SELECT `ID`, `Balance` FROM `User` 
+            WHERE `Account` = 'rain' 
+            ORDER BY `ID` DESC 
+            LIMIT 1 FOR UPDATE";
+        $data = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $Balance = $data["Balance"] - $MONEY;
+        if($Balance<=0)
+        return null;
+        sleep(5);
         $sql = "INSERT INTO `User`(`Account`, `Dispense`, `Balance`, `Remark`) VALUES (
             :Account,
             :Dispense,
@@ -15,14 +25,13 @@ class Account
             )";
         $Account = "rain";
         $Remark = "";
-        $data = $this->searchBalance();
-        $Balance = $data["Balance"] - $MONEY;
         $result = Server::$db->prepare($sql);
         $result->bindParam(':Account', $Account);
         $result->bindParam(':Dispense', $MONEY, PDO::PARAM_INT);
         $result->bindParam(':Balance', $Balance, PDO::PARAM_INT);
         $result->bindParam(':Remark', $Remark);
         $status = $result->execute();
+        Server::$db->commit();
         return $status;
     }
        //收款
