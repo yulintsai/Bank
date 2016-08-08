@@ -11,9 +11,25 @@ class Account
     }
        //收款
     
-    public function doDeposit()
+    public function doDeposit($MONEY)
     {
-
+        $sql = "INSERT INTO `User`(`Account`, `Deposit`, `Balance`, `Remark`) VALUES (
+            :Account,
+            :Deposit,
+            :Balance,
+            :Remark
+            )";
+        $Account = "rain";
+        $Remark = "";
+        $data = $this->searchBalance();
+        $Balance = $data["Balance"];
+        $result = Server::$db->prepare($sql);
+        $result->bindParam(':Account', $Account);
+        $result->bindParam(':Deposit', $MONEY, PDO::PARAM_INT);
+        $result->bindParam(':Balance', $Balance, PDO::PARAM_INT);
+        $result->bindParam(':Remark', $Remark);
+        $status = $result->execute();
+        return $status;
     }  
        //入款
     
@@ -32,7 +48,7 @@ class Account
         $sql = "SELECT * 
             FROM  `User` 
             WHERE  `Account` = 'rain'";
-        $result = Server::$db -> query($sql)-> fetch(PDO::FETCH_ASSOC);
+        $result = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
         //查詢明細
