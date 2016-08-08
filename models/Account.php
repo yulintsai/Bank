@@ -5,9 +5,25 @@ class Account
     {
         Server::pdoConnect();
     }
-    public function doDispense($Dispense)
+    public function doDispense($MONEY)
     {
-
+        $sql = "INSERT INTO `User`(`Account`, `Dispense`, `Balance`, `Remark`) VALUES (
+            :Account,
+            :Dispense,
+            :Balance,
+            :Remark
+            )";
+        $Account = "rain";
+        $Remark = "";
+        $data = $this->searchBalance();
+        $Balance = $data["Balance"] - $MONEY;
+        $result = Server::$db->prepare($sql);
+        $result->bindParam(':Account', $Account);
+        $result->bindParam(':Dispense', $MONEY, PDO::PARAM_INT);
+        $result->bindParam(':Balance', $Balance, PDO::PARAM_INT);
+        $result->bindParam(':Remark', $Remark);
+        $status = $result->execute();
+        return $status;
     }
        //收款
     
@@ -22,7 +38,7 @@ class Account
         $Account = "rain";
         $Remark = "";
         $data = $this->searchBalance();
-        $Balance = $data["Balance"];
+        $Balance = $data["Balance"] + $MONEY;
         $result = Server::$db->prepare($sql);
         $result->bindParam(':Account', $Account);
         $result->bindParam(':Deposit', $MONEY, PDO::PARAM_INT);

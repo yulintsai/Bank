@@ -3,14 +3,21 @@ class HomeController extends Controller
 {
     public function index()
     {   
-        $this -> view("index");
+        $this->view("index");
     }
     
     public function acDispense()
     {
         $this ->view("inputView");
-        // $do = $this -> model("Account");
-        // $do -> doDeposit();
+        if ($_POST['Money']) {
+            $MONEY = $_POST['Money'];
+            $do = $this->model("Account");
+            $result = $do->doDispense($MONEY);
+                if ($result) {
+                        //入款成功
+                    $this->view("alertMsg","Dispense Success");
+                    }
+        }
     }
         //出款
         
@@ -18,29 +25,30 @@ class HomeController extends Controller
     {
         $this ->view("inputView");
         if ($_POST['Money']) {
-        $MONEY = $_POST['Money'];
-        $do = $this -> model("Account");
-        $result = $do -> doDeposit($MONEY);
-            if ($result) {
-            $this -> view("alertMsg","Deposit Success");
-            }
+            $MONEY = $_POST['Money'];
+            $do = $this->model("Account");
+            $result = $do->doDeposit($MONEY);
+                if ($result) {
+                    //入款成功
+                $this->view("alertMsg","Deposit Success");
+                }
         }
     }
         //入款
     
     public function acBalance()
     {
-        $do = $this -> model("Account");
-        $data = $do ->searchBalance();
-        $this -> view("echoMsg",$data['Balance']);
+        $do = $this->model("Account");
+        $data = $do->searchBalance();
+        $this->view("echoMsg",$data['Balance']);
     }
         //餘額查詢
         
     public function acDetails()
     {
-        $do = $this -> model("Account");
-        $data = $do -> showDetails();
-        $this -> view("echoforeach",$data);
+        $do = $this->model("Account");
+        $data = $do->showDetails();
+        $this->view("echoforeach",$data);
     }
         //明細查詢
 }
