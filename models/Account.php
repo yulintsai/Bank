@@ -19,7 +19,12 @@ class Account
     
     public function searchBalance()
     {
-
+        $sql = "SELECT `ID`, `Balance` FROM `User` 
+            WHERE `Account` = 'rain' 
+            ORDER BY `ID` DESC 
+            LIMIT 1";
+        $result = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        return $result;
     }   //查詢餘額
     
     public function showDetails()

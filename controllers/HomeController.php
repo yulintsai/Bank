@@ -23,7 +23,8 @@ class HomeController extends Controller
     public function acBalance()
     {
         $do = $this -> model("Account");
-        $do -> searchBalance();
+        $data = $do ->searchBalance();
+        $this -> view("echoMsg",$data['Balance']);
     }
     
     public function acDetails()
