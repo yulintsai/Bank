@@ -12,13 +12,15 @@ class HomeController extends Controller
         if ($_POST['Money']) {
             $MONEY = $_POST['Money'];
             $do = $this->model("Account");
-            $result = $do->doDispense($MONEY);
-                if ($result) {
-                        //出款成功
-                    $this->view("alertMsg", "Dispense Success");
-                    } else {
-                        $this->view("alertMsg", "Dispense ERROR");
-                    }
+            $test = $this->model("DataFilter");
+            $remark = $test->test_input($_POST['Remark']);
+            $result = $do->doDispense($MONEY, $remark);
+            if ($result) {
+                    //出款成功
+                $this->view("alertMsg", "Dispense Success");
+                } else {
+                    $this->view("alertMsg", "Dispense ERROR");
+                }
         }
     }
         //出款
@@ -29,13 +31,15 @@ class HomeController extends Controller
         if ($_POST['Money']) {
             $MONEY = $_POST['Money'];
             $do = $this->model("Account");
-            $result = $do->doDeposit($MONEY);
-                if ($result) {
-                    //入款成功
-                $this->view("alertMsg", "Deposit Success");
-                } else {
-                    $this->view("alertMsg", "Deposit ERROR");
-                }
+            $test = $this->model("DataFilter");
+            $remark = $test->test_input($_POST['Remark']);
+            $result = $do->doDeposit($MONEY, $remark);
+            if ($result) {
+                //入款成功
+            $this->view("alertMsg", "Deposit Success");
+            } else {
+                $this->view("alertMsg", "Deposit ERROR");
+            }
         }
     }
         //入款
