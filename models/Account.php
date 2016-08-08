@@ -75,7 +75,7 @@ class Account
     
     public function showDetails()
     {
-        $sql = "SELECT * 
+        $sql = "SELECT `ID`, `Dispense`, `Deposit`, `Balance`, `Remark`
             FROM  `User` 
             WHERE  `Account` = 'rain'";
         $result = Server::$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
