@@ -64,7 +64,7 @@ class Account
         $sql = "SELECT * 
             FROM  `User` 
             WHERE  `Account` = 'rain'";
-        $result = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $result = Server::$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
         //查詢明細
