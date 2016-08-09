@@ -1,4 +1,5 @@
 <?php
+
 class Account
 {
     public function __construct()
@@ -78,11 +79,11 @@ class Account
 
             Server::$db->commit();
 
-				           if ($status) {
-				               return "SUCCESS";
-				           } else {
-				               return "FALSE";
-				           }
+	           if ($status) {
+	               return "SUCCESS";
+	           } else {
+	               return "FALSE";
+	           }
 
             } catch (Exception $err) {
                 Server::$db->rollBack();
@@ -92,19 +93,27 @@ class Account
     //查詢餘額
     public function searchBalance()
     {
+    				Server::$db->beginTransaction();
+    				
         $sql = "SELECT `ID`, `Balance` FROM `Account` WHERE `Account` = 'rain'";
-        $sql .= "ORDER BY `ID` DESC LIMIT 1";
+        $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
         $result = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+								Server::$db->commit();
 
         return $result;
     }
     //查詢明細
     public function showDetails()
     {
+    				Server::$db->beginTransaction();
+    				
         $sql = "SELECT ";
         $sql .= "`ID`, `Time`, `Dispense`, `Deposit`, `Balance`, `Remark`";
-        $sql .= "FROM `Account` WHERE `Account` = 'rain'";
+        $sql .= "FROM `Account` WHERE `Account` = 'rain' FOR UPDATE";
         $result = Server::$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+								Server::$db->commit();
 
         return $result;
     }
