@@ -1,7 +1,5 @@
 <?php
 
-
-
 class App
 {
     
@@ -14,7 +12,7 @@ class App
         //如果導入為首頁，則自動導向GameController
 
         if(!$url)
-        $controllerName = "HomeController";
+            $controllerName = "HomeController";
         if (!file_exists("controllers/$controllerName.php"))
             return;
         require_once "controllers/$controllerName.php";

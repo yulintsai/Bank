@@ -1,4 +1,5 @@
 <?php
+
 class HomeController extends Controller 
 {
     public function index()
@@ -12,8 +13,8 @@ class HomeController extends Controller
         if ($_POST['Money']) {
             $MONEY = $_POST['Money'];
             if (!is_numeric($MONEY)) {
-            $this->view("alertMsg", "Dispense Input type Error");
-            exit();
+                $this->view("alertMsg", "Dispense Input type Error");
+                exit();
             }
             $MONEY = filter_var($MONEY, FILTER_SANITIZE_NUMBER_INT);
             $do = $this->model("Account");
@@ -26,15 +27,14 @@ class HomeController extends Controller
         }
     }
         //出款
-        
     public function acDeposit()
     {
-        $this ->view("inputView");
+        $this->view("inputView");
         if ($_POST['Money']) {
             $MONEY = $_POST['Money'];
             if (!is_numeric($MONEY)) {
-            $this->view("alertMsg", "Deposit Input type Error");
-            exit();
+                $this->view("alertMsg", "Deposit Input type Error");
+                exit();
             }
             $MONEY = filter_var($MONEY, FILTER_SANITIZE_NUMBER_INT);
             $do = $this->model("Account");
@@ -47,7 +47,6 @@ class HomeController extends Controller
         }
     }
         //入款
-    
     public function acBalance()
     {
         $do = $this->model("Account");
@@ -55,7 +54,6 @@ class HomeController extends Controller
         $this->view("echoMsg", $data['Balance']);
     }
         //餘額查詢
-        
     public function acDetails()
     {
         $do = $this->model("Account");
