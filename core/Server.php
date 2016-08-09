@@ -1,7 +1,7 @@
 <?php
 
-class Server {
-
+class Server
+{
     public static $db;
 
     public static function pdoConnect()
