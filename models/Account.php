@@ -5,7 +5,7 @@ class Account
     {
         Server::pdoConnect();
     }
-    //收款
+    //出款
     public function doDispense($account, $money, $remark)
     {
         try {
@@ -21,13 +21,16 @@ class Account
             if ($balance<=0) {
                 return "餘額不足";
             }
-
+												$time=date("Y-m-d h:i:s");
+												
             $sql = "INSERT INTO `User`";
-            $sql .= "(`Account`, `Dispense`, `Balance`, `Remark`) VALUES ";
-            $sql .= "(:Account, :Dispense, :Balance, :Remark)";
+            $sql .= "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)";
+            $sql .= "VALUES";
+            $sql .= "(:Account, :Time, :Dispense, :Balance, :Remark)";
 
             $result = Server::$db->prepare($sql);
             $result->bindParam(':Account', $account);
+            $result->bindParam(':Time', $time);
             $result->bindParam(':Dispense', $money, PDO::PARAM_INT);
             $result->bindParam(':Balance', $balance, PDO::PARAM_INT);
             $result->bindParam(':Remark', $remark);
@@ -58,13 +61,16 @@ class Account
 
             $data = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
             $balance = $data["Balance"] + $money;
+            $time=date("Y-m-d h:i:s");
 
             $sql = "INSERT INTO `User`";
-            $sql .= "(`Account`, `Deposit`, `Balance`, `Remark`)";
-            $sql .= "VALUES (:Account, :Deposit, :Balance, :Remark)";
+            $sql .= "(`Account`, `Time`, `Deposit`, `Balance`, `Remark`)";
+            $sql .= "VALUES ";
+            $sql .= "(:Account, :Time, :Deposit, :Balance, :Remark)";
 
             $result = Server::$db->prepare($sql);
             $result->bindParam(':Account', $account);
+            $result->bindParam(':Time', $time);
             $result->bindParam(':Deposit', $money, PDO::PARAM_INT);
             $result->bindParam(':Balance', $balance, PDO::PARAM_INT);
             $result->bindParam(':Remark', $remark);
