@@ -10,7 +10,7 @@ class Account
     //出款
     public function doDispense($money, $remark)
     {
-        try {
+        try { //查詢餘額
         	   $account = $_SESSION['account'];
             Server::$db->beginTransaction();
 
@@ -30,6 +30,7 @@ class Account
 												$time = date("Y-m-d h:i:s");
 												$account = $_SESSION['account'];
 
+            //查詢餘額
             $sql = "INSERT INTO `Account`";
             $sql .= "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)";
             $sql .= "VALUES";
@@ -51,10 +52,10 @@ class Account
                 return "FALSE";
             }
 
-            } catch (Exception $err) {
-                Server::$db->rollBack();
-                $msg = $err->getMessage();
-            }
+        } catch (Exception $err) {
+            Server::$db->rollBack();
+            $msg = $err->getMessage();
+        }
     }
 
     //入款
@@ -96,10 +97,10 @@ class Account
                 return "FALSE";
             }
 
-            } catch (Exception $err) {
-                Server::$db->rollBack();
-                $msg = $err->getMessage();
-            }
+        } catch (Exception $err) {
+            Server::$db->rollBack();
+            $msg = $err->getMessage();
+        }
     }
 
     //查詢餘額
