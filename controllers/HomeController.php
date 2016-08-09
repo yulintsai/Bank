@@ -28,7 +28,7 @@ class HomeController extends Controller
             $account = $test->test_input($_POST['Account']);
             $remark = $test->test_input($_POST['Remark']);
             $remark = filter_var($remark, FILTER_SANITIZE_STRING);
-            $result = $do->doDispense($account, $money, $remark);
+            $result = $do->doDispense($money, $remark);
             $this->view("alertMsg", $result);
         }
     }
@@ -48,7 +48,7 @@ class HomeController extends Controller
             $remark = $test->test_input($_POST['Remark']);
             $remark = filter_var($remark, FILTER_SANITIZE_STRING);
             $money = filter_var($money, FILTER_SANITIZE_NUMBER_INT);
-            $result = $do->doDeposit($account, $money, $remark);
+            $result = $do->doDeposit($money, $remark);
             $this->view("alertMsg", $result);
         }
     }
