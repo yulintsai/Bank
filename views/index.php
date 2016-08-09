@@ -10,5 +10,6 @@
         <button id='Dispense' >出款</button><br>
         <button id='Deposit' >入款</button><br>
         <button id='Details' >帳目明細</button><br>
+        <button id='Logout' >登出</button>
     </body>
 </html>

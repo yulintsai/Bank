@@ -11,4 +11,7 @@ $(document).ready(function() {
     $("#Details").click(function(){
         document.location.href = "/Bank/Home/acDetails";
     })
+     $("#Logout").click(function(){
+        document.location.href = "/Bank/Home/logout";
+    })
 });

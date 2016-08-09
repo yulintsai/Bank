@@ -4,7 +4,7 @@ class HomeController extends Controller
 {
     public function index()
     {   
-    				if (!isset($_SESSION)) {
+    				if (!isset($_SESSION['account'])) {
             $this->view("insertAccount");
     				} else {
     				    $this->view("index");	
@@ -74,6 +74,13 @@ class HomeController extends Controller
     				$result = $choose->intoAccount($account);
     				$this->view("alertMsg", $result);
     				header("Refresh:0;/Bank");
+    }
+    public function logout()
+    {
+        $go = $this->model("Account");
+        $result = $go->logout();
+        $this->view("alertMsg", $result);
+    				header("Refresh:0;/Bank/Home");
     }
 
 }

@@ -124,4 +124,10 @@ class Account
 								
 								return "setAccount OK";
 				}
+				//登出
+			 public function logout()
+			 {
+			     session_unset();
+			     return "Logout Success";
+			 }
 }
