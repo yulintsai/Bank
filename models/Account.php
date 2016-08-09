@@ -21,7 +21,7 @@ class Account
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
-            $statement->execute(array(':account' => "$account"));
+            $statement->execute([':account' => "$account"]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
 
             $balance = $result["Balance"] - $money;
@@ -67,7 +67,7 @@ class Account
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
-            $statement->execute(array(':account' => "$account"));
+            $statement->execute([':account' => "$account"]);
             $data = $statement->fetch(PDO::FETCH_ASSOC);
 
             $balance = $data["Balance"] + $money;
@@ -107,7 +107,7 @@ class Account
         $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
         $statement = Server::$db->prepare($sql);
-        $statement->execute(array(':account' => "$account"));
+        $statement->execute([':account' => "$account"]);
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
 								Server::$db->commit();
@@ -125,7 +125,7 @@ class Account
         $sql .= "`Time`, `Dispense`, `Deposit`, `Balance`, `Remark`";
         $sql .= "FROM `Account` WHERE `Account` = :account FOR UPDATE";
         $statement = Server::$db->prepare($sql);
-        $statement->execute(array(':account' => "$account"));
+        $statement->execute([':account' => "$account"]);
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 								Server::$db->commit();
