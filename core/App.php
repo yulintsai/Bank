@@ -26,9 +26,15 @@ class App
         if (!method_exists($controller, $methodName)) {
             return;
         }
+
         unset($url[0]); unset($url[1]);
-        $params = $url ? array_values($url) : Array();
-        call_user_func_array(Array($controller, $methodName), $params);
+
+        if ($params = $url) {
+            array_values($url);
+        } else {
+            [];
+        }
+        call_user_func_array([$controller, $methodName], $params);
     }
 
     public function parseUrl() {
