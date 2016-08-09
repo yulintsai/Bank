@@ -11,15 +11,22 @@ class App
         
         //如果導入為首頁，則自動導向GameController
 
-        if(!$url)
+        if (!$url) {
             $controllerName = "HomeController";
-        if (!file_exists("controllers/$controllerName.php"))
+        }
+        if (!file_exists("controllers/$controllerName.php")) {
+
             return;
+ 
+        }
         require_once "controllers/$controllerName.php";
         $controller = new $controllerName;
         $methodName = isset($url[1]) ? $url[1] : "index";
-        if (!method_exists($controller, $methodName))
+        if (!method_exists($controller, $methodName)) {
+
             return;
+
+        }
         unset($url[0]); unset($url[1]);
         $params = $url ? array_values($url) : Array();
         call_user_func_array(Array($controller, $methodName), $params);

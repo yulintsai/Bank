@@ -1,7 +1,6 @@
 <form method="POST">
-    出/入款<input type="text" name="Money"/>
-    <input type="submit" name="Submit"/><br>
-    備註：<input type="text" name="Remark"/>
-    <input type="hidden" name="Account" value="rain"/>
+    出/入款：<input type="number" name="Money"/>台幣<br>
+    備註：<input type="text" name="Remark"/><br>
+　　　　　<input type="submit" name="Submit"/>
 </form>
 <a href='/Bank'>BACK</a>
