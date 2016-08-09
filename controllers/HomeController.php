@@ -14,6 +14,7 @@ class HomeController extends Controller
     public function acDispense()
     {
         $this->view("inputView");
+
         if ($_POST['Money']) {
             $money = $_POST['Money'];
 
@@ -26,7 +27,7 @@ class HomeController extends Controller
             $do = $this->model("Account");
             $test = $this->model("DataFilter");
             $remark = $test->test_input($_POST['Remark']);
-            $remark =& filter_var($remark, FILTER_SANITIZE_STRING);
+            $remark = filter_var($remark, FILTER_SANITIZE_STRING);
             $result = $do->doDispense($money, $remark);
             $this->view("alertMsg", $result);
         }
@@ -36,17 +37,21 @@ class HomeController extends Controller
     public function acDeposit()
     {
         $this->view("inputView");
+
         if ($_POST['Money']) {
             $money = $_POST['Money'];
+
             if (!is_numeric($money)) {
                 $this->view("alertMsg", "Deposit Input type Error");
                 exit();
             }
+
             $do = $this->model("Account");
             $test = $this->model("DataFilter");
             $remark = $test->test_input($_POST['Remark']);
-            $remark =& filter_var($remark, FILTER_SANITIZE_STRING);
-            $money =& filter_var($money, FILTER_SANITIZE_NUMBER_INT);
+            $remark = filter_var($remark, FILTER_SANITIZE_STRING);
+            $money = filter_var($money, FILTER_SANITIZE_NUMBER_INT);
+
             $result = $do->doDeposit($money, $remark);
             $this->view("alertMsg", $result);
         }
@@ -69,7 +74,7 @@ class HomeController extends Controller
     public function cAccount()
     {
     				$account = $_POST["Account"];
-    				$account =& filter_var($account, FILTER_SANITIZE_STRING);
+    				$account = filter_var($account, FILTER_SANITIZE_STRING);
     				$choose = $this->model("Account");
     				$result = $choose->intoAccount($account);
     				$this->view("alertMsg", $result);
