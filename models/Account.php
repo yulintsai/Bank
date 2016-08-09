@@ -13,11 +13,13 @@ class Account
         	   $account = $_SESSION['account'];
             Server::$db->beginTransaction();
 
-            $sql = "SELECT `ID`, `Balance` FROM `Account`"; 
-            $sql .= "WHERE `Account` = '$account'";
+            $sql = "SELECT `ID`, `Balance` FROM `Account`";
+            $sql .= "WHERE `Account` = :account";
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
-            $data = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $statement = Server::$db->prepare($sql);
+				        $statement->execute(array(':account' => "$account"));
+				        $result = $statement->fetch(PDO::FETCH_ASSOC);
             $balance = $data["Balance"] - $money;
 
             if ($balance<=0) {
@@ -51,7 +53,7 @@ class Account
             } catch (Exception $err) {
                 Server::$db->rollBack();
                 $msg = $err->getMessage();
-            } 
+            }
     }
     //入款
     public function doDeposit($money ,$remark)
@@ -61,10 +63,12 @@ class Account
             Server::$db->beginTransaction();
 
             $sql = "SELECT `ID`, `Balance`";
-            $sql .= "FROM `Account` WHERE `Account` = '$account'"; 
+            $sql .= "FROM `Account` WHERE `Account` = :account";
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
-            $data = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $statement = Server::$db->prepare($sql);
+				        $statement->execute(array(':account' => "$account"));
+				        $result = $statement->fetch(PDO::FETCH_ASSOC);
             $balance = $data["Balance"] + $money;
             $time = date("Y-m-d h:i:s");
             $account = $_SESSION['account'];
@@ -100,10 +104,14 @@ class Account
     {
     	   $account = $_SESSION['account'];
     				Server::$db->beginTransaction();
+
         $sql = "SELECT `ID`, `Balance` FROM `Account` ";
-        $sql .= "WHERE `Account` = '$account'";
+        $sql .= "WHERE `Account` = :account ";
         $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
-        $result = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+        $statement = Server::$db->prepare($sql);
+        $statement->execute(array(':account' => "$account"));
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
 
 								Server::$db->commit();
 
@@ -117,8 +125,10 @@ class Account
 
         $sql = "SELECT ";
         $sql .= "`ID`, `Time`, `Dispense`, `Deposit`, `Balance`, `Remark`";
-        $sql .= "FROM `Account` WHERE `Account` = '$account' FOR UPDATE";
-        $result = Server::$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $sql .= "FROM `Account` WHERE `Account` = :account FOR UPDATE";
+        $statement = Server::$db->prepare($sql);
+        $statement->execute(array(':account' => "$account"));
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 								Server::$db->commit();
 
