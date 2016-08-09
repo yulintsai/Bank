@@ -12,7 +12,7 @@ class HomeController extends Controller
     }
 
     //出款
-    public function acDispense()
+    public function insertAccountDispense()
     {
         $this->view("inputView");
 
@@ -40,7 +40,7 @@ class HomeController extends Controller
     }
 
 	//入款
-    public function acDeposit()
+    public function insertAccountDeposit()
     {
         $this->view("inputView");
 
@@ -69,14 +69,14 @@ class HomeController extends Controller
     }
 
     //餘額查詢
-    public function acBalance()
+    public function searchAccounBalance()
     {
         $Account = $this->model("Account");
         $data = $Account->searchBalance();
         $this->view("echoMsg", $data["Balance"]);
     }
     //明細查詢
-    public function acDetails()
+    public function searchAccountDetails()
     {
         $Account = $this->model("Account");
         $data = $Account->showDetails();
@@ -84,7 +84,7 @@ class HomeController extends Controller
     }
 
     //給帳戶session
-    public function cAccount()
+    public function giveAccountSession()
     {
         $account = $_POST["Account"];
         $account = filter_var($account, FILTER_SANITIZE_STRING);
