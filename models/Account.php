@@ -13,8 +13,8 @@ class Account
             ORDER BY `ID` DESC 
             LIMIT 1 FOR UPDATE";
         $data = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        $Balance = $data["Balance"] - $MONEY;
-        if($Balance<=0)
+        $BALANCE = $data["Balance"] - $MONEY;
+        if($BALANCE<=0)
         return null;
         $sql = "INSERT INTO `User`(`Account`, `Dispense`, `Balance`, `Remark`) VALUES (
             :Account,
@@ -25,7 +25,7 @@ class Account
         $result = Server::$db->prepare($sql);
         $result->bindParam(':Account', $account);
         $result->bindParam(':Dispense', $MONEY, PDO::PARAM_INT);
-        $result->bindParam(':Balance', $Balance, PDO::PARAM_INT);
+        $result->bindParam(':Balance', $BALANCE, PDO::PARAM_INT);
         $result->bindParam(':Remark', $remark);
         $status = $result->execute();
         Server::$db->commit();
@@ -41,7 +41,7 @@ class Account
             ORDER BY `ID` DESC 
             LIMIT 1 FOR UPDATE";
         $data = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        $Balance = $data["Balance"] + $MONEY;
+        $BALANCE = $data["Balance"] + $MONEY;
         $sql = "INSERT INTO `User`(`Account`, `Deposit`, `Balance`, `Remark`) VALUES (
             :Account,
             :Deposit,
@@ -51,7 +51,7 @@ class Account
         $result = Server::$db->prepare($sql);
         $result->bindParam(':Account', $account);
         $result->bindParam(':Deposit', $MONEY, PDO::PARAM_INT);
-        $result->bindParam(':Balance', $Balance, PDO::PARAM_INT);
+        $result->bindParam(':Balance', $BALANCE, PDO::PARAM_INT);
         $result->bindParam(':Remark', $remark);
         $status = $result->execute();
         Server::$db->commit();

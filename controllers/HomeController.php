@@ -8,9 +8,13 @@ class HomeController extends Controller
     
     public function acDispense()
     {
-        $this ->view("inputView");
+        $this->view("inputView");
         if ($_POST['Money']) {
             $MONEY = $_POST['Money'];
+            if (!is_numeric($MONEY)) {
+            $this->view("alertMsg", "Dispense Input type Error");
+            exit();
+            }
             $do = $this->model("Account");
             $test = $this->model("DataFilter");
             $account = $test->test_input($_POST['Account']);
@@ -31,6 +35,10 @@ class HomeController extends Controller
         $this ->view("inputView");
         if ($_POST['Money']) {
             $MONEY = $_POST['Money'];
+            if (!is_numeric($MONEY)) {
+            $this->view("alertMsg", "Deposit Input type Error");
+            exit();
+            }
             $do = $this->model("Account");
             $test = $this->model("DataFilter");
             $account = $test->test_input($_POST['Account']);
