@@ -34,7 +34,7 @@ class HomeController extends Controller
         }
     }
 
-				//入款
+	//入款
     public function acDeposit()
     {
         $this->view("inputView");
