@@ -7,13 +7,14 @@ class Account
         Server::pdoConnect();
     }
     //出款
-    public function doDispense($account, $money, $remark)
+    public function doDispense($money, $remark)
     {
         try {
+        	   $account = $_SESSION['account'];
             Server::$db->beginTransaction();
 
             $sql = "SELECT `ID`, `Balance` FROM `Account`"; 
-            $sql .= "WHERE `Account` = 'rain'";
+            $sql .= "WHERE `Account` = '$account'";
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $data = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -22,7 +23,8 @@ class Account
             if ($balance<=0) {
                 return "餘額不足";
             }
-												$time=date("Y-m-d h:i:s");
+												$time = date("Y-m-d h:i:s");
+												$account = $_SESSION['account'];
 												
             $sql = "INSERT INTO `Account`";
             $sql .= "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)";
@@ -51,18 +53,20 @@ class Account
             } 
     }
     //入款
-    public function doDeposit($account, $money ,$remark)
+    public function doDeposit($money ,$remark)
     {
         try {
+        	   $account = $_SESSION['account'];
             Server::$db->beginTransaction();
 
             $sql = "SELECT `ID`, `Balance`";
-            $sql .= "FROM `Account` WHERE `Account` = 'rain'"; 
+            $sql .= "FROM `Account` WHERE `Account` = '$account'"; 
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $data = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
             $balance = $data["Balance"] + $money;
-            $time=date("Y-m-d h:i:s");
+            $time = date("Y-m-d h:i:s");
+            $account = $_SESSION['account'];
 
             $sql = "INSERT INTO `Account`";
             $sql .= "(`Account`, `Time`, `Deposit`, `Balance`, `Remark`)";
@@ -93,9 +97,10 @@ class Account
     //查詢餘額
     public function searchBalance()
     {
+    	   $account = $_SESSION['account'];
     				Server::$db->beginTransaction();
-    				
-        $sql = "SELECT `ID`, `Balance` FROM `Account` WHERE `Account` = 'rain'";
+        $sql = "SELECT `ID`, `Balance` FROM `Account` ";
+        $sql .= "WHERE `Account` = '$account'";
         $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
         $result = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
@@ -106,11 +111,12 @@ class Account
     //查詢明細
     public function showDetails()
     {
+    	   $account = $_SESSION['account'];
     				Server::$db->beginTransaction();
     				
         $sql = "SELECT ";
         $sql .= "`ID`, `Time`, `Dispense`, `Deposit`, `Balance`, `Remark`";
-        $sql .= "FROM `Account` WHERE `Account` = 'rain' FOR UPDATE";
+        $sql .= "FROM `Account` WHERE `Account` = '$account' FOR UPDATE";
         $result = Server::$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 								Server::$db->commit();
@@ -122,7 +128,7 @@ class Account
 				{
 								$_SESSION['account']=$account;
 								
-								return "setAccount OK";
+								return "setAccount $account OK";
 				}
 				//登出
 			 public function logout()

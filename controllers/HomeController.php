@@ -57,7 +57,7 @@ class HomeController extends Controller
     {
         $do = $this->model("Account");
         $data = $do->searchBalance();
-        $this->view("echoMsg", $data['Balance']);
+        $this->view("echoMsg", $data["Balance"]);
     }
     //明細查詢
     public function acDetails()
@@ -69,7 +69,7 @@ class HomeController extends Controller
     //給帳戶session
     public function cAccount()
     {
-    				$account = filter_var($_POST["Account"], FILTER_SANITIZE_STRING);
+    				$account = $_POST["Account"];
     				$choose = $this->model("Account");
     				$result = $choose->intoAccount($account);
     				$this->view("alertMsg", $result);
