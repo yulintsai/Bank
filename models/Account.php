@@ -6,6 +6,7 @@ class Account
     {
         Server::pdoConnect();
     }
+
     //出款
     public function doDispense($money, $remark)
     {
@@ -18,8 +19,8 @@ class Account
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
-				        $statement->execute(array(':account' => "$account"));
-				        $data = $statement->fetch(PDO::FETCH_ASSOC);
+            $statement->execute(array(':account' => "$account"));
+            $data = $statement->fetch(PDO::FETCH_ASSOC);
             $balance = $data["Balance"] - $money;
 
             if ($balance <= 0) {
@@ -55,11 +56,12 @@ class Account
                 $msg = $err->getMessage();
             }
     }
+
     //入款
     public function doDeposit($money ,$remark)
     {
         try {
-        	   $account = $_SESSION['account'];
+            $account = $_SESSION['account'];
             Server::$db->beginTransaction();
 
             $sql = "SELECT `ID`, `Balance`";
@@ -67,8 +69,8 @@ class Account
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
-				        $statement->execute(array(':account' => "$account"));
-				        $data = $statement->fetch(PDO::FETCH_ASSOC);
+            $statement->execute(array(':account' => "$account"));
+            $data = $statement->fetch(PDO::FETCH_ASSOC);
             $balance = $data["Balance"] + $money;
             $time = date("Y-m-d h:i:s");
             $account = $_SESSION['account'];
@@ -88,22 +90,23 @@ class Account
 
             Server::$db->commit();
 
-	           if ($status) {
-	               return "SUCCESS";
-	           } else {
-	               return "FALSE";
-	           }
+            if ($status) {
+                return "SUCCESS";
+            } else {
+                return "FALSE";
+            }
 
             } catch (Exception $err) {
                 Server::$db->rollBack();
                 $msg = $err->getMessage();
             }
     }
+
     //查詢餘額
     public function searchBalance()
     {
-    	   $account = $_SESSION['account'];
-    				Server::$db->beginTransaction();
+        $account = $_SESSION['account'];
+        Server::$db->beginTransaction();
 
         $sql = "SELECT `ID`, `Balance` FROM `Account` ";
         $sql .= "WHERE `Account` = :account ";
@@ -117,6 +120,7 @@ class Account
 
         return $result;
     }
+
     //查詢明細
     public function showDetails()
     {
@@ -134,6 +138,7 @@ class Account
 
         return $result;
     }
+
 				//進入帳號
 				public function intoAccount($account)
 				{
@@ -141,11 +146,12 @@ class Account
 
 								return "setAccount $account OK";
 				}
-				//登出
-			 public function logout()
-			 {
-			     session_unset();
 
-			     return "Logout Success";
-			 }
+				//登出
+		  public function logout()
+		  {
+        session_unset();
+
+        return "Logout Success";
+    }
 }
