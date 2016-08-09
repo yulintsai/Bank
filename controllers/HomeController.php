@@ -32,7 +32,6 @@ class HomeController extends Controller
             $result = $do->doDispense($money, $remark);
             $this->view("alertMsg", $result);
         }
-
     }
 
 				//入款
@@ -92,5 +91,4 @@ class HomeController extends Controller
         $this->view("alertMsg", $result);
         header("Refresh:0;/Bank/Home");
     }
-
 }
