@@ -29,7 +29,7 @@ class Account
                 if ($status) {
                     return "SUCCESS";
                 } else {
-                        return "FALSE";
+                    return "FALSE";
                 }
             } catch (Exception $err) {
                 Server::$db->rollBack();
