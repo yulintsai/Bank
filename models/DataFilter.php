@@ -2,7 +2,7 @@
 
 class DataFilter
 {
-
+				//過濾Input
     public function test_input($data = Array()) 
     {
         $data = trim($data);
@@ -11,5 +11,5 @@ class DataFilter
 
         return $data;
     }
-        //過濾Input
+
 }

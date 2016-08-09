@@ -2,8 +2,8 @@
 
 class App
 {
-    
-    public function __construct() 
+
+    public function __construct()
     {
         $url = $this->parseUrl();
 
@@ -24,14 +24,14 @@ class App
         $params = $url ? array_values($url) : Array();
         call_user_func_array(Array($controller, $methodName), $params);
     }
-    
+
     public function parseUrl() {
         if (isset($_GET["url"])) 
         {
-            $url = rtrim($_GET["url"], "/"); //將Url內容傳成陣列
+            $url = rtrim($_GET["url"], "/");
             $url = explode("/", $url);
             return $url;
         }
     }
-    
+
 }

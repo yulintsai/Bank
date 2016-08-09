@@ -23,9 +23,10 @@ class Account
             if ($balance<=0) {
                 return "餘額不足";
             }
+
 												$time = date("Y-m-d h:i:s");
 												$account = $_SESSION['account'];
-												
+
             $sql = "INSERT INTO `Account`";
             $sql .= "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)";
             $sql .= "VALUES";
@@ -92,8 +93,8 @@ class Account
             } catch (Exception $err) {
                 Server::$db->rollBack();
                 $msg = $err->getMessage();
-            } 
-    }  
+            }
+    }
     //查詢餘額
     public function searchBalance()
     {
@@ -113,7 +114,7 @@ class Account
     {
     	   $account = $_SESSION['account'];
     				Server::$db->beginTransaction();
-    				
+
         $sql = "SELECT ";
         $sql .= "`ID`, `Time`, `Dispense`, `Deposit`, `Balance`, `Remark`";
         $sql .= "FROM `Account` WHERE `Account` = '$account' FOR UPDATE";
@@ -127,13 +128,14 @@ class Account
 				public function intoAccount($account)
 				{
 								$_SESSION['account']=$account;
-								
+
 								return "setAccount $account OK";
 				}
 				//登出
 			 public function logout()
 			 {
 			     session_unset();
+
 			     return "Logout Success";
 			 }
 }

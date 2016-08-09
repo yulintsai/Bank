@@ -1,13 +1,13 @@
 <?php
 
-class HomeController extends Controller 
+class HomeController extends Controller
 {
     public function index()
-    {   
+    {
     				if (!isset($_SESSION['account'])) {
             $this->view("insertAccount");
     				} else {
-    				    $this->view("index");	
+    				    $this->view("index");
     				}
     }
     //出款
@@ -31,6 +31,7 @@ class HomeController extends Controller
             $result = $do->doDispense($money, $remark);
             $this->view("alertMsg", $result);
         }
+
     }
 				//入款
     public function acDeposit()
@@ -70,6 +71,7 @@ class HomeController extends Controller
     public function cAccount()
     {
     				$account = $_POST["Account"];
+    				$account = filter_var($account, FILTER_SANITIZE_STRING);
     				$choose = $this->model("Account");
     				$result = $choose->intoAccount($account);
     				$this->view("alertMsg", $result);
