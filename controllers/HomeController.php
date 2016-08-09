@@ -24,11 +24,9 @@ class HomeController extends Controller
                 exit();
             }
 
-            $Account = $this->model("Account");
-            $filter = $this->model("DataFilter");
-            $remark = $filter->test_input($_POST['Remark']);
+            $remark = $this->inputFilter($_POST['Remark']);
             $money = filter_var($money, FILTER_SANITIZE_NUMBER_INT);
-            $remark = filter_var($remark, FILTER_SANITIZE_STRING);
+            $Account = $this->model("Account");
             $result = $Account->doDispense($money, $remark);
 
             if ($result) {
@@ -53,9 +51,7 @@ class HomeController extends Controller
             }
 
             $Account = $this->model("Account");
-            $filter = $this->model("DataFilter");
-            $remark = $filter->test_input($_POST['Remark']);
-            $remark = filter_var($remark, FILTER_SANITIZE_STRING);
+            $remark = $this->inputFilter($_POST['Remark']);
             $money = filter_var($money, FILTER_SANITIZE_NUMBER_INT);
 
             $result = $Account->doDeposit($money, $remark);
@@ -87,7 +83,7 @@ class HomeController extends Controller
     public function giveAccountSession()
     {
         $account = $_POST["Account"];
-        $account = filter_var($account, FILTER_SANITIZE_STRING);
+        $account = $this->inputFilter($account);
         $Account = $this->model("Account");
         $result = $Account->intoAccount($account);
         $this->view("alertMsg", $result);
@@ -100,5 +96,17 @@ class HomeController extends Controller
         $result = $Account->logout();
         $this->view("alertMsg", $result);
         header("Refresh:0;/Bank/Home");
+    }
+
+    //輸入值過濾器
+    private function inputFilter($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        $data = filter_var($data, FILTER_SANITIZE_STRING);
+        $data = $data;
+
+        return $data;
     }
 }
