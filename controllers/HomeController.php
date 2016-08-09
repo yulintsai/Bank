@@ -24,12 +24,12 @@ class HomeController extends Controller
                 exit();
             }
 
+            $Account = $this->model("Account");
+            $filter = $this->model("DataFilter");
+            $remark = $filter->test_input($_POST['Remark']);
             $money = filter_var($money, FILTER_SANITIZE_NUMBER_INT);
-            $do = $this->model("Account");
-            $test = $this->model("DataFilter");
-            $remark = $test->test_input($_POST['Remark']);
             $remark = filter_var($remark, FILTER_SANITIZE_STRING);
-            $result = $do->doDispense($money, $remark);
+            $result = $Account->doDispense($money, $remark);
 
             if ($result) {
                 $this->view("alertMsg", $result);
@@ -52,13 +52,13 @@ class HomeController extends Controller
                 exit();
             }
 
-            $do = $this->model("Account");
-            $test = $this->model("DataFilter");
-            $remark = $test->test_input($_POST['Remark']);
+            $Account = $this->model("Account");
+            $filter = $this->model("DataFilter");
+            $remark = $filter->test_input($_POST['Remark']);
             $remark = filter_var($remark, FILTER_SANITIZE_STRING);
             $money = filter_var($money, FILTER_SANITIZE_NUMBER_INT);
 
-            $result = $do->doDeposit($money, $remark);
+            $result = $Account->doDeposit($money, $remark);
 
             if ($result) {
                 $this->view("alertMsg", $result);
@@ -71,15 +71,15 @@ class HomeController extends Controller
     //餘額查詢
     public function acBalance()
     {
-        $do = $this->model("Account");
-        $data = $do->searchBalance();
+        $Account = $this->model("Account");
+        $data = $Account->searchBalance();
         $this->view("echoMsg", $data["Balance"]);
     }
     //明細查詢
     public function acDetails()
     {
-        $do = $this->model("Account");
-        $data = $do->showDetails();
+        $Account = $this->model("Account");
+        $data = $Account->showDetails();
         $this->view("showDetails", $data);
     }
 
@@ -88,16 +88,16 @@ class HomeController extends Controller
     {
         $account = $_POST["Account"];
         $account = filter_var($account, FILTER_SANITIZE_STRING);
-        $choose = $this->model("Account");
-        $result = $choose->intoAccount($account);
+        $Account = $this->model("Account");
+        $result = $Account->intoAccount($account);
         $this->view("alertMsg", $result);
         header("Refresh:0;/Bank");
     }
 
     public function logout()
     {
-        $go = $this->model("Account");
-        $result = $go->logout();
+        $Account = $this->model("Account");
+        $result = $Account->logout();
         $this->view("alertMsg", $result);
         header("Refresh:0;/Bank/Home");
     }
