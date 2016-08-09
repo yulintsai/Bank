@@ -4,7 +4,11 @@ class HomeController extends Controller
 {
     public function index()
     {   
-        $this->view("index");
+    				if (!isset($_SESSION)) {
+            $this->view("insertAccount");
+    				} else {
+    				    $this->view("index");	
+    				}
     }
     //出款
     public function acDispense()
@@ -61,6 +65,15 @@ class HomeController extends Controller
         $do = $this->model("Account");
         $data = $do->showDetails();
         $this->view("showDetails", $data);
+    }
+    //給帳戶session
+    public function cAccount()
+    {
+    				$account = filter_var($_POST["Account"], FILTER_SANITIZE_STRING);
+    				$choose = $this->model("Account");
+    				$result = $choose->intoAccount($account);
+    				$this->view("alertMsg", $result);
+    				header("Refresh:0;/Bank");
     }
 
 }

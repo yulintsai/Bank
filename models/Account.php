@@ -117,5 +117,11 @@ class Account
 
         return $result;
     }
-
+				//進入帳號
+				public function intoAccount($account)
+				{
+								$_SESSION['account']=$account;
+								
+								return "setAccount OK";
+				}
 }
