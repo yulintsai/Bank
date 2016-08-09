@@ -19,10 +19,10 @@ class Account
 
             $statement = Server::$db->prepare($sql);
 				        $statement->execute(array(':account' => "$account"));
-				        $result = $statement->fetch(PDO::FETCH_ASSOC);
+				        $data = $statement->fetch(PDO::FETCH_ASSOC);
             $balance = $data["Balance"] - $money;
 
-            if ($balance<=0) {
+            if ($balance <= 0) {
                 return "餘額不足";
             }
 
@@ -68,7 +68,7 @@ class Account
 
             $statement = Server::$db->prepare($sql);
 				        $statement->execute(array(':account' => "$account"));
-				        $result = $statement->fetch(PDO::FETCH_ASSOC);
+				        $data = $statement->fetch(PDO::FETCH_ASSOC);
             $balance = $data["Balance"] + $money;
             $time = date("Y-m-d h:i:s");
             $account = $_SESSION['account'];

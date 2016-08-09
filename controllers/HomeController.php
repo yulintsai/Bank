@@ -4,12 +4,13 @@ class HomeController extends Controller
 {
     public function index()
     {
-    				if (!isset($_SESSION['account'])) {
+        if (!isset($_SESSION['account'])) {
             $this->view("insertAccount");
-    				} else {
-    				    $this->view("index");
-    				}
+        } else {
+            $this->view("index");
+        }
     }
+
     //出款
     public function acDispense()
     {
@@ -33,6 +34,7 @@ class HomeController extends Controller
         }
 
     }
+
 				//入款
     public function acDeposit()
     {
@@ -56,6 +58,7 @@ class HomeController extends Controller
             $this->view("alertMsg", $result);
         }
     }
+
     //餘額查詢
     public function acBalance()
     {
@@ -70,22 +73,24 @@ class HomeController extends Controller
         $data = $do->showDetails();
         $this->view("showDetails", $data);
     }
+
     //給帳戶session
     public function cAccount()
     {
-    				$account = $_POST["Account"];
-    				$account = filter_var($account, FILTER_SANITIZE_STRING);
-    				$choose = $this->model("Account");
-    				$result = $choose->intoAccount($account);
-    				$this->view("alertMsg", $result);
-    				header("Refresh:0;/Bank");
+        $account = $_POST["Account"];
+        $account = filter_var($account, FILTER_SANITIZE_STRING);
+        $choose = $this->model("Account");
+        $result = $choose->intoAccount($account);
+        $this->view("alertMsg", $result);
+        header("Refresh:0;/Bank");
     }
+
     public function logout()
     {
         $go = $this->model("Account");
         $result = $go->logout();
         $this->view("alertMsg", $result);
-    				header("Refresh:0;/Bank/Home");
+        header("Refresh:0;/Bank/Home");
     }
 
 }
