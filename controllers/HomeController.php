@@ -20,6 +20,7 @@ class HomeController extends Controller
             $test = $this->model("DataFilter");
             $account = $test->test_input($_POST['Account']);
             $remark = $test->test_input($_POST['Remark']);
+            $remark = filter_var($remark, FILTER_SANITIZE_STRING);
             $result = $do->doDispense($account, $MONEY, $remark);
             $this->view("alertMsg", $result);
         }
@@ -40,6 +41,7 @@ class HomeController extends Controller
             $test = $this->model("DataFilter");
             $account = $test->test_input($_POST['Account']);
             $remark = $test->test_input($_POST['Remark']);
+            $remark = filter_var($remark, FILTER_SANITIZE_STRING);
             $result = $do->doDeposit($account, $MONEY, $remark);
             $this->view("alertMsg", $result);
         }
