@@ -6,59 +6,61 @@ class HomeController extends Controller
     {   
         $this->view("index");
     }
-    
+    //出款
     public function acDispense()
     {
         $this->view("inputView");
         if ($_POST['Money']) {
-            $MONEY = $_POST['Money'];
-            if (!is_numeric($MONEY)) {
+            $money = $_POST['Money'];
+
+            if (!is_numeric($money)) {
                 $this->view("alertMsg", "Dispense Input type Error");
                 exit();
             }
-            $MONEY = filter_var($MONEY, FILTER_SANITIZE_NUMBER_INT);
+
+            $money = filter_var($money, FILTER_SANITIZE_NUMBER_INT);
             $do = $this->model("Account");
             $test = $this->model("DataFilter");
             $account = $test->test_input($_POST['Account']);
             $remark = $test->test_input($_POST['Remark']);
             $remark = filter_var($remark, FILTER_SANITIZE_STRING);
-            $result = $do->doDispense($account, $MONEY, $remark);
+            $result = $do->doDispense($account, $money, $remark);
             $this->view("alertMsg", $result);
         }
     }
-        //出款
+				//入款
     public function acDeposit()
     {
         $this->view("inputView");
         if ($_POST['Money']) {
-            $MONEY = $_POST['Money'];
-            if (!is_numeric($MONEY)) {
+            $money = $_POST['Money'];
+            if (!is_numeric($money)) {
                 $this->view("alertMsg", "Deposit Input type Error");
                 exit();
             }
-            $MONEY = filter_var($MONEY, FILTER_SANITIZE_NUMBER_INT);
             $do = $this->model("Account");
             $test = $this->model("DataFilter");
             $account = $test->test_input($_POST['Account']);
             $remark = $test->test_input($_POST['Remark']);
             $remark = filter_var($remark, FILTER_SANITIZE_STRING);
-            $result = $do->doDeposit($account, $MONEY, $remark);
+            $money = filter_var($money, FILTER_SANITIZE_NUMBER_INT);
+            $result = $do->doDeposit($account, $money, $remark);
             $this->view("alertMsg", $result);
         }
     }
-        //入款
+    //餘額查詢
     public function acBalance()
     {
         $do = $this->model("Account");
         $data = $do->searchBalance();
         $this->view("echoMsg", $data['Balance']);
     }
-        //餘額查詢
+    //明細查詢
     public function acDetails()
     {
         $do = $this->model("Account");
         $data = $do->showDetails();
         $this->view("showDetails", $data);
     }
-        //明細查詢
+
 }
