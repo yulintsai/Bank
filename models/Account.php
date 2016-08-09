@@ -101,7 +101,8 @@ class Account
     //查詢明細
     public function showDetails()
     {
-        $sql = "SELECT `ID`, `Dispense`, `Deposit`, `Balance`, `Remark`";
+        $sql = "SELECT ";
+        $sql .= "`ID`, `Time`, `Dispense`, `Deposit`, `Balance`, `Remark`";
         $sql .= "FROM `User` WHERE `Account` = 'rain'";
         $result = Server::$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
