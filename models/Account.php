@@ -11,7 +11,7 @@ class Account
         try {
             Server::$db->beginTransaction();
 
-            $sql = "SELECT `ID`, `Balance` FROM `User`"; 
+            $sql = "SELECT `ID`, `Balance` FROM `Account`"; 
             $sql .= "WHERE `Account` = 'rain'";
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
@@ -23,7 +23,7 @@ class Account
             }
 												$time=date("Y-m-d h:i:s");
 												
-            $sql = "INSERT INTO `User`";
+            $sql = "INSERT INTO `Account`";
             $sql .= "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)";
             $sql .= "VALUES";
             $sql .= "(:Account, :Time, :Dispense, :Balance, :Remark)";
@@ -56,14 +56,14 @@ class Account
             Server::$db->beginTransaction();
 
             $sql = "SELECT `ID`, `Balance`";
-            $sql .= "FROM `User` WHERE `Account` = 'rain'"; 
+            $sql .= "FROM `Account` WHERE `Account` = 'rain'"; 
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $data = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
             $balance = $data["Balance"] + $money;
             $time=date("Y-m-d h:i:s");
 
-            $sql = "INSERT INTO `User`";
+            $sql = "INSERT INTO `Account`";
             $sql .= "(`Account`, `Time`, `Deposit`, `Balance`, `Remark`)";
             $sql .= "VALUES ";
             $sql .= "(:Account, :Time, :Deposit, :Balance, :Remark)";
@@ -92,7 +92,7 @@ class Account
     //查詢餘額
     public function searchBalance()
     {
-        $sql = "SELECT `ID`, `Balance` FROM `User` WHERE `Account` = 'rain'";
+        $sql = "SELECT `ID`, `Balance` FROM `Account` WHERE `Account` = 'rain'";
         $sql .= "ORDER BY `ID` DESC LIMIT 1";
         $result = Server::$db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
@@ -103,7 +103,7 @@ class Account
     {
         $sql = "SELECT ";
         $sql .= "`ID`, `Time`, `Dispense`, `Deposit`, `Balance`, `Remark`";
-        $sql .= "FROM `User` WHERE `Account` = 'rain'";
+        $sql .= "FROM `Account` WHERE `Account` = 'rain'";
         $result = Server::$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
