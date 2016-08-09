@@ -30,7 +30,12 @@ class HomeController extends Controller
             $remark = $test->test_input($_POST['Remark']);
             $remark = filter_var($remark, FILTER_SANITIZE_STRING);
             $result = $do->doDispense($money, $remark);
-            $this->view("alertMsg", $result);
+
+            if ($result) {
+                $this->view("alertMsg", $result);
+            } else {
+                $this->view("alertMsg", "Success");
+            }
         }
     }
 
@@ -54,7 +59,12 @@ class HomeController extends Controller
             $money = filter_var($money, FILTER_SANITIZE_NUMBER_INT);
 
             $result = $do->doDeposit($money, $remark);
-            $this->view("alertMsg", $result);
+
+            if ($result) {
+                $this->view("alertMsg", $result);
+            } else {
+                $this->view("alertMsg", "Success");
+            }
         }
     }
 

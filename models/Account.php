@@ -13,22 +13,24 @@ class Account
     				$account = $_SESSION['account'];
 
         try { //查詢餘額
+
             Server::$db->beginTransaction();
 
             $sql = "SELECT `Balance` FROM `Account`";
-            $sql .= "WHERE `Account` = :account";
+            $sql .= "WHERE `Account` = :account ";
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
-            $statement->execute([':account' => $account]);
+            $statement->execute(array(':account' => "$account"));
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            $balance = $result["Balance"] - $money;
 
+            $balance = $result["Balance"] - $money;
             if ($balance <= 0) {
                 return "餘額不足";
             }
+
 												$time = date("Y-m-d h:i:s");
-            //查詢餘額
+            //進行出款
             $sql = "INSERT INTO `Account`";
             $sql .= "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)";
             $sql .= "VALUES";
@@ -44,36 +46,32 @@ class Account
 
             Server::$db->commit();
 
-            if ($status) {
-                return "SUCCESS";
-            } else {
-                return "FALSE";
-            }
-
         } catch (Exception $err) {
             Server::$db->rollBack();
             $msg = $err->getMessage();
-												echo $msg;
+												return $msg;
         }
     }
 
     //入款
     public function doDeposit($money ,$remark)
     {
+    				$account = $_SESSION['account'];
+
         try {
-            $account = $_SESSION['account'];
+
             Server::$db->beginTransaction();
 
-            $sql = "SELECT `Balance`";
-            $sql .= "FROM `Account` WHERE `Account` = :account";
+            $sql = "SELECT `Balance` FROM `Account`";
+            $sql .= "WHERE `Account` = :account ";
             $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute(array(':account' => "$account"));
             $data = $statement->fetch(PDO::FETCH_ASSOC);
+
             $balance = $data["Balance"] + $money;
             $time = date("Y-m-d h:i:s");
-            $account = $_SESSION['account'];
 
             $sql = "INSERT INTO `Account`";
             $sql .= "(`Account`, `Time`, `Deposit`, `Balance`, `Remark`)";
@@ -90,15 +88,10 @@ class Account
 
             Server::$db->commit();
 
-            if ($status) {
-                return "SUCCESS";
-            } else {
-                return "FALSE";
-            }
-
         } catch (Exception $err) {
             Server::$db->rollBack();
             $msg = $err->getMessage();
+
             return $msg;
         }
     }
