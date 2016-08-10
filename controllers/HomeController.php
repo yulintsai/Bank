@@ -12,19 +12,17 @@ class HomeController extends Controller
     }
 
     //出款
-    public function insertAccountDispense()
+    public function insertAccountDispense($money= "", $remark = "")
     {
         $this->view("inputView", "Dispense");
-
-        if ($_POST['Money']) {
-            $money = $_POST['Money'];
+        if ($money) {
 
             if (!is_numeric($money)) {
                 $this->view("alertMsg", "Dispense Input type Error");
                 exit();
             }
 
-            $remark = $this->inputFilter($_POST['Remark']);
+            $remark = $this->inputFilter($remark);
             $Account = $this->model("Account");
             $result = $Account->doDispense($money, $remark);
 
@@ -37,12 +35,10 @@ class HomeController extends Controller
     }
 
 	//入款
-    public function insertAccountDeposit()
+    public function insertAccountDeposit($money= "", $remark = "")
     {
         $this->view("inputView", "Deposit");
-
-        if ($_POST['Money']) {
-            $money = $_POST['Money'];
+        if ($money) {
 
             if (!is_numeric($money)) {
                 $this->view("alertMsg", "Deposit Input type Error");
@@ -50,7 +46,7 @@ class HomeController extends Controller
             }
 
             $Account = $this->model("Account");
-            $remark = $this->inputFilter($_POST['Remark']);
+            $remark = $this->inputFilter($remark);
 
             $result = $Account->doDeposit($money, $remark);
 

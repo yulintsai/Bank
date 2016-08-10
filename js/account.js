@@ -14,4 +14,11 @@ $(document).ready(function() {
      $("#Logout").click(function(){
         document.location.href = "/Bank/Home/logout";
     })
+
+    $("#submit").click(function() {
+    				var money = $("#Money").val();
+    				var remark = $("#Remark").val();
+    				var status = $('#status').val();
+        document.location.href = "/Bank/Home/insertAccount"+status+"/" + money + "/" +remark;
+    })
 });
