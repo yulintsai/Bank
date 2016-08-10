@@ -1,6 +1,8 @@
 <?php
 
-require_once '/Bank/controller/HomeController.php';
+require_once '../core/Controller.php';
+require_once '../controllers/HomeController.php';
+
 
 class BankTest extends HomeController
 {
