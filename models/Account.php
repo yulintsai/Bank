@@ -142,8 +142,8 @@ class Account
 				}
 
 				//登出
-		  public function logout()
-		  {
+    public function logout()
+    {
         session_unset();
 
         return "Logout Success";
