@@ -25,7 +25,6 @@ class HomeController extends Controller
             }
 
             $remark = $this->inputFilter($_POST['Remark']);
-            $money = filter_var($money, FILTER_SANITIZE_NUMBER_INT);
             $Account = $this->model("Account");
             $result = $Account->doDispense($money, $remark);
 
