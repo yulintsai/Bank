@@ -106,7 +106,6 @@ class HomeController extends Controller
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         $data = filter_var($data, FILTER_SANITIZE_STRING);
-        $data = $data;
 
         return $data;
     }
