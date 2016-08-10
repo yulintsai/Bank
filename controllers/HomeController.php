@@ -63,7 +63,7 @@ class HomeController extends Controller
     }
 
     //餘額查詢
-    public function searchAccounBalance()
+    public function searchAccountBalance()
     {
         $Account = $this->model("Account");
         $data = $Account->searchBalance();
