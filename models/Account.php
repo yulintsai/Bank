@@ -13,7 +13,6 @@ class Account
         $account = $_SESSION['account'];
 
         try {
-
             // 查詢餘額
             Server::$db->beginTransaction();
 
@@ -62,7 +61,6 @@ class Account
         $account = $_SESSION['account'];
 
         try {
-
             // 餘額查詢
             Server::$db->beginTransaction();
 
