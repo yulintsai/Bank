@@ -52,6 +52,7 @@ class Account
         } catch (Exception $err) {
             Server::$db->rollBack();
             $msg = $err->getMessage();
+
             return $msg;
         }
     }
@@ -74,7 +75,7 @@ class Account
             $statement->execute([':account' => "$account"]);
             $data = $statement->fetch(PDO::FETCH_ASSOC);
 
-												// 增加餘額
+            // 進行入款
             $balance = $data["Balance"] + $money;
             $time = date("Y-m-d h:i:s");
 
