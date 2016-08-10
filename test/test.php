@@ -6,6 +6,6 @@ class BankTest extends HomeController
 {
     public function testInsertAccountDispense()
     {
-
+        $this->insertAccountDispense(200, "撿到");
     }
 }

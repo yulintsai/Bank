@@ -7,13 +7,14 @@ class Account
         Server::pdoConnect();
     }
 
-    //出款
+    // 出款
     public function doDispense($money, $remark)
     {
         $account = $_SESSION['account'];
 
-        try { //查詢餘額
+        try {
 
+        	   // 查詢餘額
             Server::$db->beginTransaction();
 
             $sql = "SELECT `Balance` FROM `Account`";
@@ -32,7 +33,7 @@ class Account
 
             $time = date("Y-m-d h:i:s");
 
-            //進行出款
+            // 進行出款
             $sql = "INSERT INTO `Account`";
             $sql .= "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)";
             $sql .= "VALUES";
@@ -55,13 +56,14 @@ class Account
         }
     }
 
-    //入款
+    // 入款
     public function doDeposit($money ,$remark)
     {
         $account = $_SESSION['account'];
 
-        try {//餘額查詢
+        try {
 
+        	   // 餘額查詢
             Server::$db->beginTransaction();
 
             $sql = "SELECT `Balance` FROM `Account`";
@@ -72,7 +74,7 @@ class Account
             $statement->execute([':account' => "$account"]);
             $data = $statement->fetch(PDO::FETCH_ASSOC);
 
-												//增加餘額
+												// 增加餘額
             $balance = $data["Balance"] + $money;
             $time = date("Y-m-d h:i:s");
 
@@ -99,7 +101,7 @@ class Account
         }
     }
 
-    //查詢餘額
+    // 查詢餘額
     public function searchBalance()
     {
         $account = $_SESSION['account'];
@@ -119,12 +121,12 @@ class Account
         return $result;
     }
 
-    //查詢明細
+    // 查詢明細
     public function showDetails()
     {
     	   $account = $_SESSION['account'];
 
-    				Server::$db->beginTransaction();
+        Server::$db->beginTransaction();
 
         $sql = "SELECT ";
         $sql .= "`Time`, `Dispense`, `Deposit`, `Balance`, `Remark`";
@@ -138,7 +140,7 @@ class Account
         return $result;
     }
 
-    //進入帳號
+    // 進入帳號
     public function intoAccount($account)
     {
         $_SESSION['account']=$account;
@@ -146,7 +148,7 @@ class Account
         return "setAccount $account OK";
     }
 
-				//登出
+    // 登出
     public function logout()
     {
         session_unset();

@@ -29,7 +29,7 @@ class HomeController extends Controller
             $result = $Account->doDispense($money, $remark);
 
             if ($result) {
-                $this->view("alertMsg", $result);
+                $this->view("alertMsg", "Please try again later");
             } else {
                 $this->view("alertMsg", "Success");
             }
@@ -55,7 +55,7 @@ class HomeController extends Controller
             $result = $Account->doDeposit($money, $remark);
 
             if ($result) {
-                $this->view("alertMsg", $result);
+                $this->view("alertMsg", "Please try again later");
             } else {
                 $this->view("alertMsg", "Success");
             }
