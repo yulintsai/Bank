@@ -17,9 +17,8 @@ class Account
             // 查詢餘額
             Server::$db->beginTransaction();
 
-            $sql = "SELECT `Balance` FROM `Account`";
-            $sql .= "WHERE `Account` = :account ";
-            $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
+            $sql = "SELECT `Balance` FROM `Account`WHERE `Account` = :account "
+                 . "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
@@ -34,10 +33,10 @@ class Account
             $time = date("Y-m-d h:i:s");
 
             // 進行出款
-            $sql = "INSERT INTO `Account`";
-            $sql .= "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)";
-            $sql .= "VALUES";
-            $sql .= "(:Account, :Time, :Dispense, :Balance, :Remark)";
+            $sql = "INSERT INTO `Account`"
+                 . "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)"
+                 . "VALUES"
+                 . "(:Account, :Time, :Dispense, :Balance, :Remark)";
 
             $result = Server::$db->prepare($sql);
             $result->bindParam(':Account', $account);
@@ -67,9 +66,9 @@ class Account
             // 餘額查詢
             Server::$db->beginTransaction();
 
-            $sql = "SELECT `Balance` FROM `Account`";
-            $sql .= "WHERE `Account` = :account ";
-            $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
+            $sql = "SELECT `Balance` FROM `Account`"
+                 . "WHERE `Account` = :account "
+                 . "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
@@ -79,10 +78,10 @@ class Account
             $balance = $data["Balance"] + $money;
             $time = date("Y-m-d h:i:s");
 
-            $sql = "INSERT INTO `Account`";
-            $sql .= "(`Account`, `Time`, `Deposit`, `Balance`, `Remark`)";
-            $sql .= "VALUES ";
-            $sql .= "(:Account, :Time, :Deposit, :Balance, :Remark)";
+            $sql = "INSERT INTO `Account`"
+                 . "(`Account`, `Time`, `Deposit`, `Balance`, `Remark`)"
+                 . "VALUES "
+                 . "(:Account, :Time, :Deposit, :Balance, :Remark)";
 
             $result = Server::$db->prepare($sql);
             $result->bindParam(':Account', $account);
@@ -109,9 +108,9 @@ class Account
 
         Server::$db->beginTransaction();
 
-        $sql = "SELECT `Balance` FROM `Account` ";
-        $sql .= "WHERE `Account` = :account ";
-        $sql .= "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
+        $sql = "SELECT `Balance` FROM `Account` "
+             . "WHERE `Account` = :account "
+             . "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);
@@ -129,9 +128,8 @@ class Account
 
         Server::$db->beginTransaction();
 
-        $sql = "SELECT ";
-        $sql .= "`Time`, `Dispense`, `Deposit`, `Balance`, `Remark`";
-        $sql .= "FROM `Account` WHERE `Account` = :account FOR UPDATE";
+        $sql = "SELECT `Time`, `Dispense`, `Deposit`, `Balance`, `Remark`"
+             . "FROM `Account` WHERE `Account` = :account FOR UPDATE";
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
