@@ -71,6 +71,7 @@ class HomeController extends Controller
         $data = $Account->searchBalance();
         $this->view("echoMsg", $data["Balance"]);
     }
+
     //明細查詢
     public function searchAccountDetails()
     {
@@ -87,6 +88,7 @@ class HomeController extends Controller
         $Account = $this->model("Account");
         $result = $Account->intoAccount($account);
         $this->view("alertMsg", $result);
+
         header("Refresh:0;/Bank");
     }
 
@@ -95,6 +97,7 @@ class HomeController extends Controller
         $Account = $this->model("Account");
         $result = $Account->logout();
         $this->view("alertMsg", $result);
+
         header("Refresh:0;/Bank/Home");
     }
 
