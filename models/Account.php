@@ -106,8 +106,6 @@ class Account
     {
         $account = $_SESSION['account'];
 
-        Server::$db->beginTransaction();
-
         $sql = "SELECT `Balance` FROM `Account` "
              . "WHERE `Account` = :account "
              . "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
@@ -115,8 +113,6 @@ class Account
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);
         $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-        Server::$db->commit();
 
         return $result;
     }
@@ -126,15 +122,11 @@ class Account
     {
         $account = $_SESSION['account'];
 
-        Server::$db->beginTransaction();
-
         $sql = "SELECT `Time`, `Dispense`, `Deposit`, `Balance`, `Remark`"
              . "FROM `Account` WHERE `Account` = :account FOR UPDATE";
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        Server::$db->commit();
 
         return $result;
     }
