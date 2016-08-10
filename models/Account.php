@@ -14,7 +14,7 @@ class Account
 
         try {
 
-        	   // 查詢餘額
+            // 查詢餘額
             Server::$db->beginTransaction();
 
             $sql = "SELECT `Balance` FROM `Account`";
@@ -64,7 +64,7 @@ class Account
 
         try {
 
-        	   // 餘額查詢
+            // 餘額查詢
             Server::$db->beginTransaction();
 
             $sql = "SELECT `Balance` FROM `Account`";
