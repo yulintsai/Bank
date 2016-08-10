@@ -1,0 +1,76 @@
+[10-Aug-2016 05:48:19 UTC] PHP Warning:  require_once(/Bank/controller/HomeController.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:48:19 UTC] PHP Stack trace:
+[10-Aug-2016 05:48:19 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:48:19 UTC] PHP Fatal error:  require_once(): Failed opening required '/Bank/controller/HomeController.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:48:19 UTC] PHP Stack trace:
+[10-Aug-2016 05:48:19 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:12 UTC] PHP Warning:  require_once(/Bank/controller/HomeController.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:12 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:12 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:12 UTC] PHP Fatal error:  require_once(): Failed opening required '/Bank/controller/HomeController.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:12 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:12 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:14 UTC] PHP Warning:  require_once(/Bank/controller/HomeController.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:14 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:14 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:14 UTC] PHP Fatal error:  require_once(): Failed opening required '/Bank/controller/HomeController.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:14 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:14 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:19 UTC] PHP Warning:  require_once(/Bank/controller/HomeController.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:19 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:19 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:19 UTC] PHP Fatal error:  require_once(): Failed opening required '/Bank/controller/HomeController.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:19 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:19 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:26 UTC] PHP Warning:  require_once(/Bank/controllers/HomeController.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:26 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:26 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:26 UTC] PHP Fatal error:  require_once(): Failed opening required '/Bank/controllers/HomeController.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:26 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:26 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:28 UTC] PHP Warning:  require_once(/Bank/controllers/HomeController.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:28 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:28 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:28 UTC] PHP Fatal error:  require_once(): Failed opening required '/Bank/controllers/HomeController.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:28 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:28 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:29 UTC] PHP Warning:  require_once(/Bank/controllers/HomeController.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:29 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:29 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:29 UTC] PHP Fatal error:  require_once(): Failed opening required '/Bank/controllers/HomeController.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/Bank/test/test.php on line 3
+[10-Aug-2016 05:49:29 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:29 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:57 UTC] PHP Fatal error:  Class 'Controller' not found in /home/ubuntu/workspace/Bank/controllers/HomeController.php on line 4
+[10-Aug-2016 05:49:57 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:57 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:57 UTC] PHP   2. require_once() /home/ubuntu/workspace/Bank/test/test.php:3
+[10-Aug-2016 05:49:59 UTC] PHP Fatal error:  Class 'Controller' not found in /home/ubuntu/workspace/Bank/controllers/HomeController.php on line 4
+[10-Aug-2016 05:49:59 UTC] PHP Stack trace:
+[10-Aug-2016 05:49:59 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:49:59 UTC] PHP   2. require_once() /home/ubuntu/workspace/Bank/test/test.php:3
+[10-Aug-2016 05:51:10 UTC] PHP Fatal error:  Class 'Controller' not found in /home/ubuntu/workspace/Bank/controllers/HomeController.php on line 4
+[10-Aug-2016 05:51:10 UTC] PHP Stack trace:
+[10-Aug-2016 05:51:10 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:51:10 UTC] PHP   2. require_once() /home/ubuntu/workspace/Bank/test/test.php:3
+[10-Aug-2016 05:51:13 UTC] PHP Fatal error:  Class 'Controller' not found in /home/ubuntu/workspace/Bank/controllers/HomeController.php on line 4
+[10-Aug-2016 05:51:13 UTC] PHP Stack trace:
+[10-Aug-2016 05:51:13 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:51:13 UTC] PHP   2. require_once() /home/ubuntu/workspace/Bank/test/test.php:3
+[10-Aug-2016 05:52:38 UTC] PHP Fatal error:  Class 'Controller' not found in /home/ubuntu/workspace/Bank/controllers/HomeController.php on line 4
+[10-Aug-2016 05:52:38 UTC] PHP Stack trace:
+[10-Aug-2016 05:52:38 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:52:38 UTC] PHP   2. require_once() /home/ubuntu/workspace/Bank/test/test.php:3
+[10-Aug-2016 05:52:41 UTC] PHP Fatal error:  Class 'Controller' not found in /home/ubuntu/workspace/Bank/controllers/HomeController.php on line 4
+[10-Aug-2016 05:52:41 UTC] PHP Stack trace:
+[10-Aug-2016 05:52:41 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:52:41 UTC] PHP   2. require_once() /home/ubuntu/workspace/Bank/test/test.php:3
+[10-Aug-2016 05:52:43 UTC] PHP Fatal error:  Class 'Controller' not found in /home/ubuntu/workspace/Bank/controllers/HomeController.php on line 4
+[10-Aug-2016 05:52:43 UTC] PHP Stack trace:
+[10-Aug-2016 05:52:43 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:52:43 UTC] PHP   2. require_once() /home/ubuntu/workspace/Bank/test/test.php:3
+[10-Aug-2016 05:52:51 UTC] PHP Warning:  require_once(core/Controller.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/Bank/test/test.php on line 2
+[10-Aug-2016 05:52:51 UTC] PHP Stack trace:
+[10-Aug-2016 05:52:51 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
+[10-Aug-2016 05:52:51 UTC] PHP Fatal error:  require_once(): Failed opening required 'core/Controller.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/Bank/test/test.php on line 2
+[10-Aug-2016 05:52:51 UTC] PHP Stack trace:
+[10-Aug-2016 05:52:51 UTC] PHP   1. {main}() /home/ubuntu/workspace/Bank/test/test.php:0
