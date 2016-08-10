@@ -41,7 +41,8 @@ class App
         call_user_func_array([$controller, $methodName], $params);
     }
 
-    public function parseUrl() {
+    public function parseUrl()
+    {
         if (isset($_GET["url"])) {
             $url = rtrim($_GET["url"], "/");
             $url = explode("/", $url);
