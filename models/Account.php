@@ -10,7 +10,7 @@ class Account
     //出款
     public function doDispense($money, $remark)
     {
-    				$account = $_SESSION['account'];
+        $account = $_SESSION['account'];
 
         try { //查詢餘額
 
@@ -29,7 +29,7 @@ class Account
                 return "餘額不足";
             }
 
-												$time = date("Y-m-d h:i:s");
+            $time = date("Y-m-d h:i:s");
             //進行出款
             $sql = "INSERT INTO `Account`";
             $sql .= "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)";
@@ -49,14 +49,14 @@ class Account
         } catch (Exception $err) {
             Server::$db->rollBack();
             $msg = $err->getMessage();
-												return $msg;
+            return $msg;
         }
     }
 
     //入款
     public function doDeposit($money ,$remark)
     {
-    				$account = $_SESSION['account'];
+        $account = $_SESSION['account'];
 
         try {
 
@@ -133,13 +133,13 @@ class Account
         return $result;
     }
 
-				//進入帳號
-				public function intoAccount($account)
-				{
-								$_SESSION['account']=$account;
+    //進入帳號
+    public function intoAccount($account)
+    {
+        $_SESSION['account']=$account;
 
-								return "setAccount $account OK";
-				}
+        return "setAccount $account OK";
+    }
 
 				//登出
     public function logout()
