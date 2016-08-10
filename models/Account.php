@@ -110,7 +110,7 @@ class Account
         $statement->execute([':account' => "$account"]);
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-								Server::$db->commit();
+        Server::$db->commit();
 
         return $result;
     }
@@ -128,7 +128,7 @@ class Account
         $statement->execute([':account' => "$account"]);
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-								Server::$db->commit();
+        Server::$db->commit();
 
         return $result;
     }
