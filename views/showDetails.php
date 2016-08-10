@@ -9,3 +9,4 @@
         echo "</tr>";
     }
     echo "</table>";
+    echo "<a href='/Bank'>BACK</a>";

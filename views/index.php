@@ -5,7 +5,7 @@
         <?php $this->js("account");?>
     </head>
     <body>
-        <H1>Bank</H1>
+        <H1><?php echo $_SESSION['account']."'s ";?>Bank</H1>
         <button id='Balance'>餘額查詢</button><br>
         <button id='Dispense'>出款</button><br>
         <button id='Deposit'>入款</button><br>

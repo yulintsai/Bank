@@ -14,7 +14,7 @@ class HomeController extends Controller
     //出款
     public function insertAccountDispense()
     {
-        $this->view("inputView");
+        $this->view("inputView", "Dispense");
 
         if ($_POST['Money']) {
             $money = $_POST['Money'];
@@ -39,7 +39,7 @@ class HomeController extends Controller
 	//入款
     public function insertAccountDeposit()
     {
-        $this->view("inputView");
+        $this->view("inputView", "Deposit");
 
         if ($_POST['Money']) {
             $money = $_POST['Money'];
