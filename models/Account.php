@@ -124,7 +124,7 @@ class Account
     // 查詢明細
     public function showDetails()
     {
-    	   $account = $_SESSION['account'];
+        $account = $_SESSION['account'];
 
         Server::$db->beginTransaction();
 
