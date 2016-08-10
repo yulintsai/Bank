@@ -51,7 +51,6 @@ class HomeController extends Controller
 
             $Account = $this->model("Account");
             $remark = $this->inputFilter($_POST['Remark']);
-            $money = filter_var($money, FILTER_SANITIZE_NUMBER_INT);
 
             $result = $Account->doDeposit($money, $remark);
 

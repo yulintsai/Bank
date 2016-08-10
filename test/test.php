@@ -8,5 +8,4 @@ class BankTest extends HomeController
     {
 
     }
-
 }
