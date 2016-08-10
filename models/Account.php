@@ -25,11 +25,13 @@ class Account
             $result = $statement->fetch(PDO::FETCH_ASSOC);
 
             $balance = $result["Balance"] - $money;
+
             if ($balance <= 0) {
                 return "餘額不足";
             }
 
             $time = date("Y-m-d h:i:s");
+
             //進行出款
             $sql = "INSERT INTO `Account`";
             $sql .= "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)";
@@ -58,7 +60,7 @@ class Account
     {
         $account = $_SESSION['account'];
 
-        try {
+        try {//餘額查詢
 
             Server::$db->beginTransaction();
 
@@ -70,6 +72,7 @@ class Account
             $statement->execute([':account' => "$account"]);
             $data = $statement->fetch(PDO::FETCH_ASSOC);
 
+												//增加餘額
             $balance = $data["Balance"] + $money;
             $time = date("Y-m-d h:i:s");
 
@@ -100,6 +103,7 @@ class Account
     public function searchBalance()
     {
         $account = $_SESSION['account'];
+
         Server::$db->beginTransaction();
 
         $sql = "SELECT `Balance` FROM `Account` ";
@@ -119,6 +123,7 @@ class Account
     public function showDetails()
     {
     	   $account = $_SESSION['account'];
+
     				Server::$db->beginTransaction();
 
         $sql = "SELECT ";
