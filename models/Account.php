@@ -21,9 +21,9 @@ class Account
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $data = $statement->fetch(PDO::FETCH_ASSOC);
 
-            $balance = $result["balance"] - $money;
+            $balance = $data["balance"] - $money;
 
             if ($balance <= 0) {
                 return "餘額不足";
@@ -62,19 +62,30 @@ class Account
 
         try {
             // 餘額查詢
+
             Server::$db->beginTransaction();
 
-            $sql = "SELECT `balance` FROM `Account`"
-                 . "WHERE `account` = :account "
-                 . "ORDER BY `ID` DESC LIMIT 1 LOCK IN SHARE MODE";
+            $sql = "SELECT `balance` FROM `Client`"
+                 . "WHERE `account` = :account LOCK IN SHARE MODE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
             $data = $statement->fetch(PDO::FETCH_ASSOC);
 
             // 進行入款
-            $balance = $data["Balance"] + $money;
+
+            $balance = $data["balance"] + $money;
             $time = date("Y-m-d h:i:s");
+
+            $sql = "UPDATE `Client` SET `balance`= :balance "
+                 . "WHERE `account`= :account";
+
+            $result = Server::$db->prepare($sql);
+            $result->bindParam(':account', $account);
+            $result->bindParam(':balance', $balance, PDO::PARAM_INT);
+            $status = $result->execute();
+
+            // 新增入款明細
 
             $sql = "INSERT INTO `Account`"
                  . "(`account`, `time`, `deposit`, `balance`, `remark`)"
