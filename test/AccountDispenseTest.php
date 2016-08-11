@@ -22,6 +22,6 @@ class AccountDispenseTest extends \PHPUnit_Framework_TestCase
     {
         $_SESSION['account']='rain';
         $Home = new HomeController();
-        $Home->insertAccountDispense(yoyo,200);
+        $Home->insertAccountDispense("yoyo",200);
     }
 }

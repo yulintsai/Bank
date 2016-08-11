@@ -19,7 +19,8 @@ class HomeController extends Controller
 
             if (!is_numeric($money)) {
                 $this->view("alertMsg", "Dispense Input type Error");
-                 header("Refresh:0;/Bank/Home/insertAccountDispense");
+
+                return;
             }
 
             $remark = $this->inputFilter($remark);
@@ -42,7 +43,8 @@ class HomeController extends Controller
 
             if (!is_numeric($money)) {
                 $this->view("alertMsg", "Deposit Input type Error");
-                header("Refresh:0;/Bank/Home/insertAccountDeposit");
+
+                return;
             }
 
             $Account = $this->model("Account");
