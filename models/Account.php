@@ -121,9 +121,8 @@ class Account
     {
         $account = $_SESSION['account'];
 
-        $sql = "SELECT `balance` FROM `Account` "
-             . "WHERE `account` = :account "
-             . "ORDER BY `ID` DESC LIMIT 1";
+        $sql = "SELECT `balance` FROM `Client` "
+             . "WHERE `account` = :account ";
 
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);
