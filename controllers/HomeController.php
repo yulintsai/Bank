@@ -65,7 +65,7 @@ class HomeController extends Controller
     {
         $Account = $this->model("Account");
         $data = $Account->searchBalance();
-        $this->view("echoMsg", $data["Balance"]);
+        $this->view("echoMsg", $data["balance"]);
     }
 
     //明細查詢

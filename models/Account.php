@@ -17,7 +17,7 @@ class Account
             Server::$db->beginTransaction();
 
             $sql = "SELECT `balance` FROM `Account` WHERE `account` = :account "
-                 . "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
+                 . "ORDER BY `ID` DESC LIMIT 1 LOCK IN SHARE MODE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
@@ -66,7 +66,7 @@ class Account
 
             $sql = "SELECT `balance` FROM `Account`"
                  . "WHERE `account` = :account "
-                 . "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
+                 . "ORDER BY `ID` DESC LIMIT 1 LOCK IN SHARE MODE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
@@ -132,9 +132,21 @@ class Account
     // 進入帳號
     public function intoAccount($account)
     {
-        $_SESSION['account']=$account;
 
-        return "setAccount $account OK";
+        $sql = "SELECT `account` FROM `Client` WHERE `account` = :account";
+        $statement = Server::$db->prepare($sql);
+        $statement->execute([':account' => "$account"]);
+        $result = $statement->fetch();
+
+        if ($result) {
+            $_SESSION['account']=$account;
+
+            return "setAccount $account OK";
+
+        } else {
+
+            return "No account";
+        }
     }
 
     // 登出
