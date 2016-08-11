@@ -122,7 +122,7 @@ class Account
         $account = $_SESSION['account'];
 
         $sql = "SELECT `balance` FROM `Client` "
-             . "WHERE `account` = :account ";
+             . "WHERE `account` = :account";
 
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);

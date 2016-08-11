@@ -11,7 +11,7 @@ class HomeController extends Controller
         }
     }
 
-    //出款
+    // 出款
     public function insertAccountDispense($money= "", $remark = "")
     {
         $this->view("inputView", "Dispense");
@@ -35,7 +35,7 @@ class HomeController extends Controller
         }
     }
 
-	//入款
+    // 入款
     public function insertAccountDeposit($money= "", $remark = "")
     {
         $this->view("inputView", "Deposit");
@@ -60,7 +60,7 @@ class HomeController extends Controller
         }
     }
 
-    //餘額查詢
+    // 餘額查詢
     public function searchAccountBalance()
     {
         $Account = $this->model("Account");
@@ -68,7 +68,7 @@ class HomeController extends Controller
         $this->view("echoMsg", $data["balance"]);
     }
 
-    //明細查詢
+    // 明細查詢
     public function searchAccountDetails()
     {
         $Account = $this->model("Account");
@@ -76,7 +76,7 @@ class HomeController extends Controller
         $this->view("showDetails", $data);
     }
 
-    //給帳戶session
+    // 給帳戶session
     public function giveAccountSession()
     {
         $account = $_POST["Account"];
@@ -97,7 +97,7 @@ class HomeController extends Controller
         header("Refresh:0;/Bank/Home");
     }
 
-    //輸入值過濾器
+    // 輸入值過濾器
     private function inputFilter($data)
     {
         $data = trim($data);
