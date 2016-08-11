@@ -120,8 +120,8 @@ class Account
     {
         $account = $_SESSION['account'];
 
-        $sql = "SELECT `Time`, `Dispense`, `Deposit`, `Balance`, `Remark`"
-             . "FROM `Account` WHERE `Account` = :account FOR UPDATE";
+        $sql = "SELECT `time`, `dispense`, `deposit`, `balance`, `remark`"
+             . "FROM `Account` WHERE `account` = :account FOR UPDATE";
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
