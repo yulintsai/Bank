@@ -17,7 +17,7 @@ class Account
             Server::$db->beginTransaction();
 
             $sql = "SELECT `balance` FROM `Client` " .
-                   "WHERE `account` = :account LOCK IN SHARE MODE";
+                   "WHERE `account` = :account FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
@@ -73,7 +73,7 @@ class Account
             Server::$db->beginTransaction();
 
             $sql = "SELECT `balance` FROM `Client`" .
-                   "WHERE `account` = :account LOCK IN SHARE MODE";
+                   "WHERE `account` = :account FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
