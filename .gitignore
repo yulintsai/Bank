@@ -1,0 +1,7 @@
+myProject/
+composer.json
+composer.lock
+composer.phar
+php_errors.log
+phpunit.xml
+vendor/
