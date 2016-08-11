@@ -104,8 +104,8 @@ class Account
     {
         $account = $_SESSION['account'];
 
-        $sql = "SELECT `Balance` FROM `Account` "
-             . "WHERE `Account` = :account "
+        $sql = "SELECT `balance` FROM `Account` "
+             . "WHERE `account` = :account "
              . "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
         $statement = Server::$db->prepare($sql);
