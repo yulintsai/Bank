@@ -16,8 +16,8 @@ class Account
             // 查詢餘額
             Server::$db->beginTransaction();
 
-            $sql = "SELECT `balance` FROM `Client`"
-                 . "WHERE `account` = :account LOCK IN SHARE MODE";
+            $sql = "SELECT `balance` FROM `Client` " .
+                   "WHERE `account` = :account LOCK IN SHARE MODE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
@@ -32,8 +32,8 @@ class Account
             $time = date("Y-m-d h:i:s");
 
             // 進行出款
-            $sql = "UPDATE `Client` SET `balance`= :balance "
-                 . "WHERE `account`= :account";
+            $sql = "UPDATE `Client` SET `balance`= :balance " .
+                   "WHERE `account`= :account";
 
             $result = Server::$db->prepare($sql);
             $result->bindParam(':account', $account);
@@ -41,10 +41,10 @@ class Account
             $status = $result->execute();
 
             // 新增出款明細
-            $sql = "INSERT INTO `Account`"
-                 . "(`account`, `time`, `dispense`, `balance`, `remark`)"
-                 . "VALUES"
-                 . "(:account, :time, :dispense, :balance, :remark)";
+            $sql = "INSERT INTO `Account`" .
+                   "(`account`, `time`, `dispense`, `balance`, `remark`)" .
+                   "VALUES" .
+                   "(:account, :time, :dispense, :balance, :remark)";
 
             $result = Server::$db->prepare($sql);
             $result->bindParam(':account', $account);
@@ -55,7 +55,6 @@ class Account
             $status = $result->execute();
 
             Server::$db->commit();
-
         } catch (Exception $err) {
             Server::$db->rollBack();
             $msg = $err->getMessage();
@@ -73,8 +72,8 @@ class Account
             // 餘額查詢
             Server::$db->beginTransaction();
 
-            $sql = "SELECT `balance` FROM `Client`"
-                 . "WHERE `account` = :account LOCK IN SHARE MODE";
+            $sql = "SELECT `balance` FROM `Client`" .
+                   "WHERE `account` = :account LOCK IN SHARE MODE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
@@ -84,8 +83,8 @@ class Account
             $balance = $data["balance"] + $money;
             $time = date("Y-m-d h:i:s");
 
-            $sql = "UPDATE `Client` SET `balance`= :balance "
-                 . "WHERE `account`= :account";
+            $sql = "UPDATE `Client` SET `balance`= :balance " .
+                   "WHERE `account`= :account";
 
             $result = Server::$db->prepare($sql);
             $result->bindParam(':account', $account);
@@ -93,10 +92,10 @@ class Account
             $status = $result->execute();
 
             // 新增入款明細
-            $sql = "INSERT INTO `Account`"
-                 . "(`account`, `time`, `deposit`, `balance`, `remark`)"
-                 . "VALUES "
-                 . "(:account, :time, :deposit, :balance, :remark)";
+            $sql = "INSERT INTO `Account`" .
+                   "(`account`, `time`, `deposit`, `balance`, `remark`)" .
+                   "VALUES " .
+                   "(:account, :time, :deposit, :balance, :remark)";
 
             $result = Server::$db->prepare($sql);
             $result->bindParam(':account', $account);
@@ -107,7 +106,6 @@ class Account
             $status = $result->execute();
 
             Server::$db->commit();
-
         } catch (Exception $err) {
             Server::$db->rollBack();
             $msg = $err->getMessage();
@@ -121,8 +119,8 @@ class Account
     {
         $account = $_SESSION['account'];
 
-        $sql = "SELECT `balance` FROM `Client` "
-             . "WHERE `account` = :account";
+        $sql = "SELECT `balance` FROM `Client` " .
+               "WHERE `account` = :account";
 
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);
@@ -136,8 +134,8 @@ class Account
     {
         $account = $_SESSION['account'];
 
-        $sql = "SELECT `time`, `dispense`, `deposit`, `balance`, `remark`"
-             . "FROM `Account` WHERE `account` = :account";
+        $sql = "SELECT `time`, `dispense`, `deposit`, `balance`, `remark`" .
+               "FROM `Account` WHERE `account` = :account";
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -148,7 +146,6 @@ class Account
     // 進入帳號
     public function intoAccount($account)
     {
-
         $sql = "SELECT `account` FROM `Client` WHERE `account` = :account";
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);
@@ -160,7 +157,6 @@ class Account
             return "setAccount $account OK";
 
         } else {
-
             return "No account";
         }
     }
