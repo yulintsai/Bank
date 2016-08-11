@@ -17,7 +17,7 @@ class HomeController extends Controller
         $this->view("inputView", "Dispense");
         if ($money) {
 
-            if (!is_numeric($money)) {
+            if (!is_numeric($money) || ($money < 0)) {
                 $this->view("alertMsg", "Dispense Input type Error");
 
                 return;
@@ -41,7 +41,7 @@ class HomeController extends Controller
         $this->view("inputView", "Deposit");
         if ($money) {
 
-            if (!is_numeric($money)) {
+            if (!is_numeric($money) || ($money < 0)) {
                 $this->view("alertMsg", "Deposit Input type Error");
 
                 return;
