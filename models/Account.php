@@ -64,8 +64,8 @@ class Account
             // 餘額查詢
             Server::$db->beginTransaction();
 
-            $sql = "SELECT `Balance` FROM `Account`"
-                 . "WHERE `Account` = :account "
+            $sql = "SELECT `balance` FROM `Account`"
+                 . "WHERE `account` = :account "
                  . "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
@@ -77,16 +77,16 @@ class Account
             $time = date("Y-m-d h:i:s");
 
             $sql = "INSERT INTO `Account`"
-                 . "(`Account`, `Time`, `Deposit`, `Balance`, `Remark`)"
+                 . "(`account`, `time`, `deposit`, `balance`, `remark`)"
                  . "VALUES "
-                 . "(:Account, :Time, :Deposit, :Balance, :Remark)";
+                 . "(:account, :time, :deposit, :balance, :remark)";
 
             $result = Server::$db->prepare($sql);
-            $result->bindParam(':Account', $account);
-            $result->bindParam(':Time', $time);
-            $result->bindParam(':Deposit', $money, PDO::PARAM_INT);
-            $result->bindParam(':Balance', $balance, PDO::PARAM_INT);
-            $result->bindParam(':Remark', $remark);
+            $result->bindParam(':account', $account);
+            $result->bindParam(':time', $time);
+            $result->bindParam(':deposit', $money, PDO::PARAM_INT);
+            $result->bindParam(':balance', $balance, PDO::PARAM_INT);
+            $result->bindParam(':remark', $remark);
             $status = $result->execute();
 
             Server::$db->commit();
