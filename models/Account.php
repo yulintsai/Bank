@@ -106,7 +106,7 @@ class Account
 
         $sql = "SELECT `balance` FROM `Account` "
              . "WHERE `account` = :account "
-             . "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
+             . "ORDER BY `ID` DESC LIMIT 1";
 
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);
@@ -121,7 +121,7 @@ class Account
         $account = $_SESSION['account'];
 
         $sql = "SELECT `time`, `dispense`, `deposit`, `balance`, `remark`"
-             . "FROM `Account` WHERE `account` = :account FOR UPDATE";
+             . "FROM `Account` WHERE `account` = :account";
         $statement = Server::$db->prepare($sql);
         $statement->execute([':account' => "$account"]);
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
