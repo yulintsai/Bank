@@ -16,8 +16,8 @@ class Account
             // 查詢餘額
             Server::$db->beginTransaction();
 
-            $sql = "SELECT `balance` FROM `Account` WHERE `account` = :account "
-                 . "ORDER BY `ID` DESC LIMIT 1 LOCK IN SHARE MODE";
+            $sql = "SELECT `balance` FROM `Client`"
+                 . "WHERE `account` = :account LOCK IN SHARE MODE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
@@ -32,6 +32,15 @@ class Account
             $time = date("Y-m-d h:i:s");
 
             // 進行出款
+            $sql = "UPDATE `Client` SET `balance`= :balance "
+                 . "WHERE `account`= :account";
+
+            $result = Server::$db->prepare($sql);
+            $result->bindParam(':account', $account);
+            $result->bindParam(':balance', $balance, PDO::PARAM_INT);
+            $status = $result->execute();
+
+            // 新增出款明細
             $sql = "INSERT INTO `Account`"
                  . "(`account`, `time`, `dispense`, `balance`, `remark`)"
                  . "VALUES"
@@ -62,7 +71,6 @@ class Account
 
         try {
             // 餘額查詢
-
             Server::$db->beginTransaction();
 
             $sql = "SELECT `balance` FROM `Client`"
@@ -73,7 +81,6 @@ class Account
             $data = $statement->fetch(PDO::FETCH_ASSOC);
 
             // 進行入款
-
             $balance = $data["balance"] + $money;
             $time = date("Y-m-d h:i:s");
 
@@ -86,7 +93,6 @@ class Account
             $status = $result->execute();
 
             // 新增入款明細
-
             $sql = "INSERT INTO `Account`"
                  . "(`account`, `time`, `deposit`, `balance`, `remark`)"
                  . "VALUES "
