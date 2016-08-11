@@ -31,13 +31,15 @@ class App
             return;
         }
 
-        unset($url[0]); unset($url[1]);
+        unset($url[0]);
+        unset($url[1]);
 
         if($url){
-            $params = array_values($url);
+            $params = $url;
         }else{
             $params = [];
         }
+
         call_user_func_array([$controller, $methodName], $params);
     }
 
