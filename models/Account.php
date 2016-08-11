@@ -16,14 +16,14 @@ class Account
             // 查詢餘額
             Server::$db->beginTransaction();
 
-            $sql = "SELECT `Balance` FROM `Account`WHERE `Account` = :account "
+            $sql = "SELECT `balance` FROM `Account` WHERE `account` = :account "
                  . "ORDER BY `ID` DESC LIMIT 1 FOR UPDATE";
 
             $statement = Server::$db->prepare($sql);
             $statement->execute([':account' => "$account"]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-            $balance = $result["Balance"] - $money;
+            $balance = $result["balance"] - $money;
 
             if ($balance <= 0) {
                 return "餘額不足";
@@ -33,16 +33,16 @@ class Account
 
             // 進行出款
             $sql = "INSERT INTO `Account`"
-                 . "(`Account`, `Time`, `Dispense`, `Balance`, `Remark`)"
+                 . "(`account`, `time`, `dispense`, `balance`, `remark`)"
                  . "VALUES"
-                 . "(:Account, :Time, :Dispense, :Balance, :Remark)";
+                 . "(:account, :time, :dispense, :balance, :remark)";
 
             $result = Server::$db->prepare($sql);
-            $result->bindParam(':Account', $account);
-            $result->bindParam(':Time', $time);
-            $result->bindParam(':Dispense', $money, PDO::PARAM_INT);
-            $result->bindParam(':Balance', $balance, PDO::PARAM_INT);
-            $result->bindParam(':Remark', $remark);
+            $result->bindParam(':account', $account);
+            $result->bindParam(':time', $time);
+            $result->bindParam(':dispense', $money, PDO::PARAM_INT);
+            $result->bindParam(':balance', $balance, PDO::PARAM_INT);
+            $result->bindParam(':remark', $remark);
             $status = $result->execute();
 
             Server::$db->commit();
