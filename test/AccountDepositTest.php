@@ -10,8 +10,7 @@ class AccountDepositTest extends \PHPUnit_Framework_TestCase
         $Account = new Account();
         $Account->intoAccount(1);
         $result = $Account->doDeposit(50, "基本入款");
-        $Account->showDetails();
-        $this -> assertEquals("", $result);
+        $this -> assertNull($result);
     }
 
     public function testNegative()
