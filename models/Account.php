@@ -32,13 +32,14 @@ class Account
             $time = date("Y-m-d h:i:s");
 
             // 進行出款
-            $sql = "UPDATE `Client` SET `balance`= :balance " .
+            $sql = "UPDATE `Client` SET `balance`= :balance, `time` = :time " .
                    "WHERE `account`= :account";
 
             $result = Server::$db->prepare($sql);
             $result->bindParam(':account', $account);
+            $result->bindParam(':time', $time);
             $result->bindParam(':balance', $balance, PDO::PARAM_INT);
-            $status = $result->execute();
+            $doDispenseStatus = $result->execute();
 
             // 新增出款明細
             $sql = "INSERT INTO `Account`" .
@@ -52,7 +53,7 @@ class Account
             $result->bindParam(':dispense', $money, PDO::PARAM_INT);
             $result->bindParam(':balance', $balance, PDO::PARAM_INT);
             $result->bindParam(':remark', $remark);
-            $status = $result->execute();
+            $insertDetail = $result->execute();
 
             Server::$db->commit();
         } catch (Exception $err) {
@@ -83,11 +84,12 @@ class Account
             $balance = $data["balance"] + $money;
             $time = date("Y-m-d h:i:s");
 
-            $sql = "UPDATE `Client` SET `balance`= :balance " .
+            $sql = "UPDATE `Client` SET `balance`= :balance, `time` = :time " .
                    "WHERE `account`= :account";
 
             $result = Server::$db->prepare($sql);
             $result->bindParam(':account', $account);
+            $result->bindParam(':time', $time);
             $result->bindParam(':balance', $balance, PDO::PARAM_INT);
             $status = $result->execute();
 
@@ -105,7 +107,7 @@ class Account
             $result->bindParam(':remark', $remark);
             $status = $result->execute();
 
-            Server::$db->commit();
+            Server::$db->commit;
         } catch (Exception $err) {
             Server::$db->rollBack();
             $msg = $err->getMessage();
@@ -152,7 +154,7 @@ class Account
         $result = $statement->fetch();
 
         if ($result) {
-            $_SESSION['account']=$account;
+            $_SESSION['account'] = $account;
 
             return "setAccount $account OK";
 
