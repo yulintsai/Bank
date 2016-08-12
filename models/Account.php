@@ -26,7 +26,7 @@ class Account
             $balance = $data["balance"] - $money;
 
             if ($balance <= 0) {
-                return "餘額不足";
+                throw new PDOException("餘額不足");
             }
 
             $time = date("Y-m-d h:i:s");
@@ -72,6 +72,10 @@ class Account
         try {
             // 餘額查詢
             Server::$db->beginTransaction();
+
+            if (!is_numeric($money)){
+                throw new PDOException("金額必須為數字");
+            }
 
             $sql = "SELECT `balance` FROM `Client`" .
                    "WHERE `account` = :account FOR UPDATE";
@@ -128,7 +132,7 @@ class Account
         $statement->execute([':account' => "$account"]);
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-        return $result;
+        return $result["balance"];
     }
 
     // 查詢明細
