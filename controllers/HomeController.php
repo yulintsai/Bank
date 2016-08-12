@@ -28,7 +28,7 @@ class HomeController extends Controller
             $result = $Account->doDispense($money, $remark);
 
             if ($result) {
-                $this->view("alertMsg", "Please try again later");
+                $this->view("alertMsg", $result);
             } else {
                 $this->view("alertMsg", "Success");
             }
@@ -65,7 +65,7 @@ class HomeController extends Controller
     {
         $Account = $this->model("Account");
         $data = $Account->searchBalance();
-        $this->view("echoMsg", $data["balance"]);
+        $this->view("echoMsg", $data);
     }
 
     // 明細查詢
