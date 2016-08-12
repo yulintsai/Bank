@@ -18,7 +18,7 @@ class AccountDepositTest extends \PHPUnit_Framework_TestCase
     {
         $Account = new Account();
         $Account->intoAccount(1);
-        $result = $Account->doDeposit("HI", "負數測試");
-        $this -> assertEquals("金額必須為數字", $result);
+        $result = $Account->doDeposit(-2, "負數測試");
+        $this -> assertEquals("金額不能為負", $result);
     }
 }
