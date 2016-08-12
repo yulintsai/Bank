@@ -74,7 +74,6 @@ class Account
             Server::$db->beginTransaction();
 
             if ($money < 0){
-
                 throw new PDOException("金額不能為負");
             }
 
