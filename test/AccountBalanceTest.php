@@ -10,5 +10,6 @@ class AccountBalanceTest extends \PHPUnit_Framework_TestCase
         $Account = new Account();
         $Account->intoAccount(1);
         $result = $Account->searchBalance();
+        $this -> assertEquals(50052335, $result);
     }
 }
