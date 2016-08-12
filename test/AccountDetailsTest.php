@@ -11,9 +11,9 @@ class AccountDetailsTest extends \PHPUnit_Framework_TestCase
         $Account->intoAccount(999);
         $result = $Account->showDetails();
         $this -> assertEquals("2016-08-12 03:39:30", $result[0]['time']);
-        $this -> assertEquals("", $result[0]['dispense']);
+        $this -> assertEmpty($result[0]['dispense']);
         $this -> assertEquals("888", $result[0]['deposit']);
         $this -> assertEquals("888", $result[0]['balance']);
-        $this -> assertEquals("", $result[0]['remark']);
+        $this -> assertEmpty($result[0]['remark']);
     }
 }
