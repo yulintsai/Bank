@@ -21,14 +21,7 @@ class AccountDispenseTest extends \PHPUnit_Framework_TestCase
     public function testBust()
     {
         $_SESSION['account']='1';
-        $result = $this->Account->doDispense(50000, "超額領出測試");
+        $result = $this->Account->doDispense(5000000000000, "超額領出測試");
         $this -> assertEquals("餘額不足", $result);
-    }
-
-    public function testInputMoney()
-    {
-        $_SESSION['account']='1';
-        $result = $this->Account->doDispense("fwqfw", "非數字測試");
-        $this -> assertEquals("", $result);
     }
 }
