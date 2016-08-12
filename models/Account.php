@@ -42,18 +42,9 @@ class Account
             $doDispenseStatus = $result->execute();
 
             // 新增出款明細
-            $sql = "INSERT INTO `Account`" .
-                   "(`account`, `time`, `dispense`, `balance`, `remark`)" .
-                   "VALUES" .
-                   "(:account, :time, :dispense, :balance, :remark)";
+            $this->addDetail($account ,$time ,$money ,$balance ,$remark);
 
-            $result = Server::$db->prepare($sql);
-            $result->bindParam(':account', $account);
-            $result->bindParam(':time', $time);
-            $result->bindParam(':dispense', $money, PDO::PARAM_INT);
-            $result->bindParam(':balance', $balance, PDO::PARAM_INT);
-            $result->bindParam(':remark', $remark);
-            $insertDetail = $result->execute();
+
 
             Server::$db->commit();
         } catch (Exception $err) {
@@ -98,18 +89,7 @@ class Account
             $status = $result->execute();
 
             // 新增入款明細
-            $sql = "INSERT INTO `Account`" .
-                   "(`account`, `time`, `deposit`, `balance`, `remark`)" .
-                   "VALUES " .
-                   "(:account, :time, :deposit, :balance, :remark)";
-
-            $result = Server::$db->prepare($sql);
-            $result->bindParam(':account', $account);
-            $result->bindParam(':time', $time);
-            $result->bindParam(':deposit', $money, PDO::PARAM_INT);
-            $result->bindParam(':balance', $balance, PDO::PARAM_INT);
-            $result->bindParam(':remark', $remark);
-            $status = $result->execute();
+            $this->addDetail($account ,$time ,$money ,$balance ,$remark);
 
             Server::$db->commit();
         } catch (Exception $err) {
@@ -133,6 +113,25 @@ class Account
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $result["balance"];
+    }
+
+    // 新增明細
+    private function addDetail($account ,$time ,$money ,$balance ,$remark)
+    {
+        $sql = "INSERT INTO `Account`" .
+               "(`account`, `time`, `dispense`, `balance`, `remark`)" .
+               "VALUES" .
+               "(:account, :time, :dispense, :balance, :remark)";
+
+        $result = Server::$db->prepare($sql);
+        $result->bindParam(':account', $account);
+        $result->bindParam(':time', $time);
+        $result->bindParam(':dispense', $money, PDO::PARAM_INT);
+        $result->bindParam(':balance', $balance, PDO::PARAM_INT);
+        $result->bindParam(':remark', $remark);
+        $insertDetail = $result->execute();
+
+        return $insertDetail;
     }
 
     // 查詢明細
