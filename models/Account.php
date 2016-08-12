@@ -73,8 +73,9 @@ class Account
             // 餘額查詢
             Server::$db->beginTransaction();
 
-            if (!is_numeric($money)){
-                throw new PDOException("金額必須為數字");
+            if ($money < 0){
+
+                throw new PDOException("金額不能為負");
             }
 
             $sql = "SELECT `balance` FROM `Client`" .
@@ -111,7 +112,7 @@ class Account
             $result->bindParam(':remark', $remark);
             $status = $result->execute();
 
-            Server::$db->commit;
+            Server::$db->commit();
         } catch (Exception $err) {
             Server::$db->rollBack();
             $msg = $err->getMessage();
