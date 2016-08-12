@@ -9,7 +9,7 @@ class AccountDispenseTest extends \PHPUnit_Framework_TestCase
     {
         $Account = new Account();
         $_SESSION['account']='1';
-        $result = $Account->doDispense(50, "正常領出測試");
+        $result = $Account->doDispense(500, "正常領出測試");
         $this -> assertEquals("", $result);
     }
 

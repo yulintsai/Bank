@@ -8,8 +8,8 @@ class AccountBalanceTest extends \PHPUnit_Framework_TestCase
     public function testSearchAccountBalance()
     {
         $Account = new Account();
-        $Account->intoAccount(1);
+        $Account->intoAccount(999);
         $result = $Account->searchBalance();
-        $this -> assertEquals(50052335, $result);
+        $this -> assertEquals(888, $result);
     }
 }
